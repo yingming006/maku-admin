@@ -87,12 +87,12 @@
 				<el-divider />
 
 				<el-space direction="vertical">
-					<el-alert :title="$t('settings.tips')" type="warning" :closable="false"> </el-alert>
+<!--					<el-alert :title="$t('settings.tips')" type="warning" :closable="false"> </el-alert>-->
 					<div class="config-btn">
-						<el-button type="primary" size="default" :icon="CopyDocument" @click="handleCopyConfig">
-							{{ $t('settings.copyConfig') }}
-						</el-button>
-						<el-button type="info" size="default" :icon="RefreshRight" @click="handleResetConfig">
+<!--						<el-button type="primary" size="default" :icon="CopyDocument" @click="handleCopyConfig">-->
+<!--							{{ $t('settings.copyConfig') }}-->
+<!--						</el-button>-->
+						<el-button type="info" size="large" :icon="RefreshRight" @click="handleResetConfig">
 							{{ $t('settings.reset') }}
 						</el-button>
 					</div>

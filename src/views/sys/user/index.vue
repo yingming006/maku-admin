@@ -69,6 +69,7 @@ import { IHooksOptions } from '@/hooks/interface'
 import constant from '@/utils/constant'
 import { useUserExportApi } from '@/api/sys/user'
 import { ElMessage, UploadProps } from 'element-plus'
+import FastTableColumn from '@/components/fast-table-column/src/fast-table-column.vue'
 
 const state: IHooksOptions = reactive({
 	dataListUrl: '/sys/user/page',
