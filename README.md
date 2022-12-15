@@ -43,6 +43,12 @@ npm run build
 - Github仓库：https://github.com/makunet/maku-admin
 
 
+## 微信交流群
+为了更好的交流，我们新提供了微信交流群，需扫描下面的二维码，关注公众号，回复【加群】，根据提示信息，作者会拉你进群的，感谢配合！
+
+![](https://maku.net/app/img/qrcode.jpg)
+
+
 ## 支持
 如果觉得框架还不错，或者已经在使用了，希望你可以去 [Github](https://github.com/makunet/maku-admin) 或 [Gitee](https://gitee.com/makunet/maku-admin) 帮作者点个 ⭐ Star，这将是对作者极大的鼓励与支持。
 
