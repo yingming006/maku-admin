@@ -8,9 +8,6 @@
 				<el-input v-model="state.queryForm.mobile" placeholder="手机号" clearable></el-input>
 			</el-form-item>
 			<el-form-item>
-				<fast-select v-model="state.queryForm.gender" dict-type="user_gender" clearable placeholder="性别"></fast-select>
-			</el-form-item>
-			<el-form-item>
 				<el-button @click="getDataList()">查询</el-button>
 			</el-form-item>
 			<el-form-item>
@@ -32,7 +29,6 @@
 			<el-table-column type="selection" header-align="center" align="center" width="50"></el-table-column>
 			<el-table-column prop="username" label="用户名" header-align="center" align="center"></el-table-column>
 			<el-table-column prop="realName" label="姓名" header-align="center" align="center"></el-table-column>
-			<fast-table-column prop="gender" label="性别" dict-type="user_gender"></fast-table-column>
 			<el-table-column prop="mobile" label="手机号" header-align="center" align="center"></el-table-column>
 			<el-table-column prop="email" label="邮箱" header-align="center" align="center"></el-table-column>
 			<el-table-column prop="orgName" label="所属机构" header-align="center" align="center"></el-table-column>
@@ -76,8 +72,7 @@ const state: IHooksOptions = reactive({
 	deleteUrl: '/sys/user',
 	queryForm: {
 		username: '',
-		mobile: '',
-		gender: ''
+		mobile: ''
 	}
 })
 

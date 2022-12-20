@@ -14,7 +14,7 @@ class Cache {
 	}
 
 	getSidebarOpened = (): boolean => {
-		return Storage.getItem(CacheKey.SidebarOpenedKey) || false
+		return Storage.getItem(CacheKey.SidebarOpenedKey) || true
 	}
 
 	setSidebarOpened = (value: boolean) => {

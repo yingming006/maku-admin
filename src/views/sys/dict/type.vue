@@ -85,7 +85,8 @@ const state: IHooksOptions = reactive({
 	queryForm: {
 		dictName: '',
 		dictType: ''
-	}
+	},
+	limit: 50
 })
 
 const dictDataVisible = ref(false)

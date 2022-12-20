@@ -101,6 +101,13 @@ export const constantMenu = [
 				url: 'demo/wangeditor/index',
 				openStyle: 0,
 				icon: 'icon-unorderedlist'
+			},
+			{
+				id: 1006,
+				name: '组件',
+				url: 'demo/component/index',
+				openStyle: 0,
+				icon: 'icon-unorderedlist'
 			}
 		]
 	}

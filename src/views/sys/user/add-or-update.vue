@@ -18,9 +18,6 @@
 					style="width: 100%"
 				/>
 			</el-form-item>
-			<el-form-item prop="gender" label="性别">
-				<fast-radio-group v-model="dataForm.gender" dict-type="user_gender"></fast-radio-group>
-			</el-form-item>
 			<el-form-item prop="mobile" label="手机号">
 				<el-input v-model="dataForm.mobile" placeholder="手机号"></el-input>
 			</el-form-item>
@@ -58,6 +55,7 @@ import { useOrgListApi } from '@/api/sys/orgs'
 import { useUserApi, useUserSubmitApi } from '@/api/sys/user'
 import { usePostListApi } from '@/api/sys/post'
 import { useRoleListApi } from '@/api/sys/role'
+import FastRadioGroup from '@/components/fast-radio-group/src/fast-radio-group.vue'
 
 const emit = defineEmits(['refreshDataList'])
 
@@ -74,7 +72,6 @@ const dataForm = reactive({
 	orgId: '',
 	orgName: '',
 	password: '',
-	gender: 0,
 	email: '',
 	mobile: '',
 	roleIdList: [] as any[],
@@ -132,8 +129,7 @@ const getUser = (id: number) => {
 const dataRules = ref({
 	username: [{ required: true, message: '必填项不能为空', trigger: 'blur' }],
 	realName: [{ required: true, message: '必填项不能为空', trigger: 'blur' }],
-	mobile: [{ required: true, message: '必填项不能为空', trigger: 'blur' }],
-	orgId: [{ required: true, message: '必填项不能为空', trigger: 'blur' }]
+	mobile: [{ required: true, message: '必填项不能为空', trigger: 'blur' }]
 })
 
 // 表单提交
