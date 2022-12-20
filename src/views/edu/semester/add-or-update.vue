@@ -97,13 +97,13 @@ const handleChangeDate = (val: any) => {
 
 	if (dayjs(val[0]).year() == dayjs(val[1]).year()) {
 		dataForm.name = dayjs(val[0]).subtract(1, 'year').year() + '-' + dayjs(val[1]).year() + '学年度第二学期'
+		dataForm.year = dayjs(val[0]).subtract(1, 'year').year() + '学年度'
 		dataForm.semester = '2'
 	} else {
 		dataForm.name = dayjs(val[0]).year() + '-' + dayjs(val[1]).year() + '学年度第一学期'
+		dataForm.year = dayjs(val[0]).year() + '学年度'
 		dataForm.semester = '1'
 	}
-
-	dataForm.year = dayjs(val[0]).year() + '学年度'
 }
 
 defineExpose({

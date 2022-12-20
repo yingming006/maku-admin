@@ -14,7 +14,7 @@
 		<el-table v-loading="state.dataListLoading" :data="state.dataList" border style="width: 100%" @selection-change="selectionChangeHandle">
 			<el-table-column type="selection" header-align="center" align="center" width="50"></el-table-column>
 			<el-table-column prop="name" label="标题" header-align="center" align="center"></el-table-column>
-			<fast-table-column prop="year" label="学年" dict-type="clazz_clazz"></fast-table-column>
+			<el-table-column prop="year" label="学年" header-align="center" align="center"></el-table-column>
 			<fast-table-column prop="semester" label="学期" dict-type="semester_num"></fast-table-column>
 			<el-table-column prop="startDate" label="开始时间" header-align="center" align="center"></el-table-column>
 			<el-table-column prop="endDate" label="结束时间" header-align="center" align="center"></el-table-column>
