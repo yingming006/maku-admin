@@ -51,7 +51,7 @@
 	</el-card>
 </template>
 
-<script setup lang="ts" name="MakuScoreIndex">
+<script setup lang="ts" name="EduScoreIndex">
 import { useCrud } from '@/hooks'
 import { reactive, ref } from 'vue'
 import AddOrUpdate from './add-or-update.vue'

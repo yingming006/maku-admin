@@ -5,26 +5,19 @@
 				<el-button @click="getDataList()">查询</el-button>
 			</el-form-item>
 			<el-form-item>
-				<el-button v-auth="'edu:teacher:save'" type="primary" @click="addOrUpdateHandle()"> 新增 </el-button>
+				<el-button v-auth="'edu:teacher:save'" type="primary" @click="addOrUpdateHandle()"> 新增</el-button>
 			</el-form-item>
 			<el-form-item>
-				<el-button v-auth="'edu:teacher:delete'" type="danger" @click="deleteBatchHandle()"> 删除 </el-button>
+				<el-button v-auth="'edu:teacher:delete'" type="danger" @click="deleteBatchHandle()"> 删除</el-button>
 			</el-form-item>
 		</el-form>
 		<el-table v-loading="state.dataListLoading" :data="state.dataList" border style="width: 100%" @selection-change="selectionChangeHandle">
 			<el-table-column type="selection" header-align="center" align="center" width="50"></el-table-column>
-			<el-table-column prop="id" label="id" header-align="center" align="center"></el-table-column>
+			<el-table-column pron="title" label="名称" header-align="center" align="center"></el-table-column>
 			<el-table-column prop="no" label="工号" header-align="center" align="center"></el-table-column>
 			<el-table-column prop="name" label="姓名" header-align="center" align="center"></el-table-column>
-			<el-table-column prop="gender" label="性别" header-align="center" align="center"></el-table-column>
+			<fast-table-column prop="gender" label="性别" dict-type="user_gender"></fast-table-column>
 			<el-table-column prop="phone" label="联系方式" header-align="center" align="center"></el-table-column>
-			<el-table-column prop="isEnabled" label="是否启用" header-align="center" align="center"></el-table-column>
-			<el-table-column prop="deleted" label="是否删除" header-align="center" align="center"></el-table-column>
-			<el-table-column prop="version" label="乐观锁" header-align="center" align="center"></el-table-column>
-			<el-table-column prop="creator" label="创建人" header-align="center" align="center"></el-table-column>
-			<el-table-column prop="createTime" label="创建时间" header-align="center" align="center"></el-table-column>
-			<el-table-column prop="updater" label="更新人" header-align="center" align="center"></el-table-column>
-			<el-table-column prop="updateTime" label="更新时间" header-align="center" align="center"></el-table-column>
 			<el-table-column label="操作" fixed="right" header-align="center" align="center" width="150">
 				<template #default="scope">
 					<el-button v-auth="'edu:teacher:update'" type="primary" link @click="addOrUpdateHandle(scope.row.id)">修改 </el-button>
@@ -48,10 +41,12 @@
 	</el-card>
 </template>
 
-<script setup lang="ts" name="MakuTeacherIndex">
+<script setup lang="ts" name="EduTeacherIndex">
 import { useCrud } from '@/hooks'
-import { reactive, ref } from 'vue'
+import { onMounted, reactive, ref } from 'vue'
 import { IHooksOptions } from '@/hooks/interface'
+import AddOrUpdate from '@/views/edu/teacher/add-or-update.vue'
+import FastTableColumn from '@/components/fast-table-column/src/fast-table-column.vue'
 
 const state: IHooksOptions = reactive({
 	dataListUrl: '/edu/teacher/page',

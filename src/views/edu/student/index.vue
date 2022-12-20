@@ -48,7 +48,7 @@
 	</el-card>
 </template>
 
-<script setup lang="ts" name="MakuStudentIndex">
+<script setup lang="ts" name="EduStudentIndex">
 import { useCrud } from '@/hooks'
 import { reactive, ref } from 'vue'
 import { IHooksOptions } from '@/hooks/interface'

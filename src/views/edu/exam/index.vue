@@ -50,7 +50,7 @@
 	</el-card>
 </template>
 
-<script setup lang="ts" name="MakuExamIndex">
+<script setup lang="ts" name="EduExamIndex">
 import { useCrud } from '@/hooks'
 import { reactive, ref } from 'vue'
 import AddOrUpdate from './add-or-update.vue'

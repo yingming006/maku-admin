@@ -42,7 +42,7 @@
 	</el-card>
 </template>
 
-<script setup lang="ts" name="MakuClazzIndex">
+<script setup lang="ts" name="EduClazzIndex">
 import { useCrud } from '@/hooks'
 import { reactive, ref } from 'vue'
 import AddOrUpdate from './add-or-update.vue'
