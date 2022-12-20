@@ -13,16 +13,8 @@
 		</el-form>
 		<el-table v-loading="state.dataListLoading" :data="state.dataList" border style="width: 100%" @selection-change="selectionChangeHandle">
 			<el-table-column type="selection" header-align="center" align="center" width="50"></el-table-column>
-			<el-table-column prop="id" label="id" header-align="center" align="center"></el-table-column>
 			<el-table-column prop="name" label="年级" header-align="center" align="center"></el-table-column>
-			<el-table-column prop="stage" label="阶段" header-align="center" align="center"></el-table-column>
-			<el-table-column prop="isEnabled" label="是否启用" header-align="center" align="center"></el-table-column>
-			<el-table-column prop="deleted" label="是否删除" header-align="center" align="center"></el-table-column>
-			<el-table-column prop="version" label="乐观锁" header-align="center" align="center"></el-table-column>
-			<el-table-column prop="creator" label="创建人" header-align="center" align="center"></el-table-column>
-			<el-table-column prop="createTime" label="创建时间" header-align="center" align="center"></el-table-column>
-			<el-table-column prop="updater" label="更新人" header-align="center" align="center"></el-table-column>
-			<el-table-column prop="updateTime" label="更新时间" header-align="center" align="center"></el-table-column>
+			<fast-table-column dict-type="grade_stage" label="阶段" prop="stage"></fast-table-column>
 			<el-table-column label="操作" fixed="right" header-align="center" align="center" width="150">
 				<template #default="scope">
 					<el-button v-auth="'edu:grade:update'" type="primary" link @click="addOrUpdateHandle(scope.row.id)">修改 </el-button>
@@ -51,11 +43,13 @@ import { useCrud } from '@/hooks'
 import { reactive, ref } from 'vue'
 import { IHooksOptions } from '@/hooks/interface'
 import AddOrUpdate from '@/views/edu/grade/add-or-update.vue'
+import FastTableColumn from '@/components/fast-table-column/src/fast-table-column.vue'
 
 const state: IHooksOptions = reactive({
 	dataListUrl: '/edu/grade/page',
 	deleteUrl: '/edu/grade',
-	queryForm: {}
+	queryForm: {},
+	limit: 15
 })
 
 const addOrUpdateRef = ref()

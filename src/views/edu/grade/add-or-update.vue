@@ -5,7 +5,7 @@
 				<el-input v-model="dataForm.name" placeholder="年级"></el-input>
 			</el-form-item>
 			<el-form-item label="阶段" prop="stage">
-				<el-input v-model="dataForm.stage" placeholder="阶段"></el-input>
+				<fast-select v-model="dataForm.stage" dict-type="grade_stage" placeholder="阶段" style="width: 100%"></fast-select>
 			</el-form-item>
 		</el-form>
 		<template #footer>
