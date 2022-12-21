@@ -13,7 +13,6 @@
 		</el-form>
 		<el-table v-loading="state.dataListLoading" :data="state.dataList" border style="width: 100%" @selection-change="selectionChangeHandle">
 			<el-table-column type="selection" header-align="center" align="center" width="50"></el-table-column>
-			<el-table-column pron="title" label="名称" header-align="center" align="center"></el-table-column>
 			<el-table-column prop="no" label="工号" header-align="center" align="center"></el-table-column>
 			<el-table-column prop="name" label="姓名" header-align="center" align="center"></el-table-column>
 			<fast-table-column prop="gender" label="性别" dict-type="user_gender"></fast-table-column>
