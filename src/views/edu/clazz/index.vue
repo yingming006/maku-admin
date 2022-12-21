@@ -13,12 +13,11 @@
 		</el-form>
 		<el-table v-loading="state.dataListLoading" :data="state.dataList" border style="width: 100%" @selection-change="selectionChangeHandle">
 			<el-table-column type="selection" header-align="center" align="center" width="50"></el-table-column>
-			<fast-table-column prop="grade" label="年级" dict-type="clazz_grade"></fast-table-column>
-			<fast-table-column prop="clazz" label="班级" dict-type="clazz_clazz"></fast-table-column>
-			<!--			<el-table-column prop="creator" label="创建人" header-align="center" align="center"></el-table-column>-->
-			<!--			<el-table-column prop="createTime" label="创建时间" header-align="center" align="center"></el-table-column>-->
-			<!--			<el-table-column prop="updater" label="更新人" header-align="center" align="center"></el-table-column>-->
-			<!--			<el-table-column prop="updateTime" label="更新时间" header-align="center" align="center"></el-table-column>-->
+			<el-table-column prop="name" label="行政班级" header-align="center" align="center"></el-table-column>
+			<el-table-column prop="entranceYear" label="入学年份" header-align="center" align="center"></el-table-column>
+			<fast-table-column prop="gradeId" label="年级" dict-type="grade_dict"></fast-table-column>
+			<fast-table-column prop="semesterId" label="学期" dict-type="semester_dict"></fast-table-column>
+			<fast-table-column prop="headmasterId" label="班主任" dict-type="teacher_dict"></fast-table-column>
 			<el-table-column label="操作" fixed="right" header-align="center" align="center" width="150">
 				<template #default="scope">
 					<el-button v-auth="'edu:clazz:update'" type="primary" link @click="addOrUpdateHandle(scope.row.id)">修改 </el-button>

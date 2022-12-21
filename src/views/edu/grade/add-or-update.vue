@@ -19,6 +19,7 @@
 import { reactive, ref } from 'vue'
 import { ElMessage } from 'element-plus/es'
 import { useGradeApi, useGradeSubmitApi } from '@/api/edu/grade'
+import FastSelect from '@/components/fast-select/src/fast-select.vue'
 
 const emit = defineEmits(['refreshDataList'])
 

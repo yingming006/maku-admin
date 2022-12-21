@@ -1,11 +1,20 @@
 <template>
-	<el-dialog v-model="visible" :title="!dataForm.id ? '新增' : '修改'" :close-on-click-modal="false">
+	<el-dialog v-model="visible" :title="!dataForm.id ? '新增' : '修改'" :close-on-click-modal="false" width="400px">
 		<el-form ref="dataFormRef" :model="dataForm" :rules="dataRules" label-width="100px" @keyup.enter="submitHandle()">
-			<el-form-item prop="grade" label="年级">
-				<fast-select v-model="dataForm.grade" dict-type="clazz_grade" placeholder="年级" style="width: 100%"></fast-select>
+			<el-form-item label="行政班级" prop="name">
+				<el-input v-model="dataForm.name" placeholder="行政班级，例如：一班、十一班"></el-input>
 			</el-form-item>
-			<el-form-item prop="clazz" label="班级">
-				<fast-select v-model="dataForm.clazz" dict-type="clazz_clazz" placeholder="班级" style="width: 100%"></fast-select>
+			<el-form-item label="入学年份" prop="entranceYear">
+				<el-date-picker v-model="dataForm.entranceYear" type="year" value-format="YYYY" placeholder="入学年份" style="width: 100%" />
+			</el-form-item>
+			<el-form-item prop="gradeId" label="年级">
+				<fast-select v-model="dataForm.gradeId" dict-type="grade_dict" placeholder="年级" style="width: 100%"></fast-select>
+			</el-form-item>
+			<el-form-item prop="semesterId" label="学期">
+				<fast-select v-model="dataForm.semesterId" dict-type="semester_dict" placeholder="学期" style="width: 100%"></fast-select>
+			</el-form-item>
+			<el-form-item prop="headmasterId" label="班主任">
+				<fast-select v-model="dataForm.headmasterId" dict-type="teacher_dict" placeholder="班主任" style="width: 100%"></fast-select>
 			</el-form-item>
 		</el-form>
 		<template #footer>
@@ -28,8 +37,11 @@ const dataFormRef = ref()
 
 const dataForm = reactive({
 	id: '',
-	grade: '',
-	clazz: ''
+	name: '',
+	entranceYear: '',
+	gradeId: '',
+	semesterId: '',
+	headmasterId: ''
 })
 
 const init = (id?: number) => {
