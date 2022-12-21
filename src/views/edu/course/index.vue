@@ -13,15 +13,7 @@
 		</el-form>
 		<el-table v-loading="state.dataListLoading" :data="state.dataList" border style="width: 100%" @selection-change="selectionChangeHandle">
 			<el-table-column type="selection" header-align="center" align="center" width="50"></el-table-column>
-			<el-table-column prop="id" label="id" header-align="center" align="center"></el-table-column>
 			<el-table-column prop="name" label="课程名称" header-align="center" align="center"></el-table-column>
-			<el-table-column prop="isEnabled" label="是否启用" header-align="center" align="center"></el-table-column>
-			<el-table-column prop="deleted" label="是否删除" header-align="center" align="center"></el-table-column>
-			<el-table-column prop="version" label="乐观锁" header-align="center" align="center"></el-table-column>
-			<el-table-column prop="creator" label="创建人" header-align="center" align="center"></el-table-column>
-			<el-table-column prop="createTime" label="创建时间" header-align="center" align="center"></el-table-column>
-			<el-table-column prop="updater" label="更新人" header-align="center" align="center"></el-table-column>
-			<el-table-column prop="updateTime" label="更新时间" header-align="center" align="center"></el-table-column>
 			<el-table-column label="操作" fixed="right" header-align="center" align="center" width="150">
 				<template #default="scope">
 					<el-button v-auth="'edu:course:update'" type="primary" link @click="addOrUpdateHandle(scope.row.id)">修改 </el-button>

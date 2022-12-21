@@ -1,7 +1,8 @@
 <template>
 	<el-dialog v-model="visible" :title="!dataForm.id ? '新增' : '修改'" :close-on-click-modal="false">
 		<el-form ref="dataFormRef" :model="dataForm" :rules="dataRules" label-width="100px" @keyup.enter="submitHandle()">
-	    		</el-form>
+			<el-form-item label="课程名称" prop="name"> <el-input v-model="dataForm.name" placeholder="课程名称"></el-input> </el-form-item
+		></el-form>
 		<template #footer>
 			<el-button @click="visible = false">取消</el-button>
 			<el-button type="primary" @click="submitHandle()">确定</el-button>
@@ -20,6 +21,8 @@ const visible = ref(false)
 const dataFormRef = ref()
 
 const dataForm = reactive({
+	id: '',
+	name: ''
 })
 
 const init = (id?: number) => {
@@ -42,8 +45,7 @@ const getCourse = (id: number) => {
 	})
 }
 
-const dataRules = ref({
-})
+const dataRules = ref({})
 
 // 表单提交
 const submitHandle = () => {

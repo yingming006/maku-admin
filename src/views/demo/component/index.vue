@@ -1,50 +1,54 @@
 <template>
-	<el-card header="二维码生成">
-		<el-date-picker
-			v-model="value2"
-			type="monthrange"
-			unlink-panels
-			range-separator="To"
-			start-placeholder="Start date"
-			end-placeholder="End date"
-			:shortcuts="shortcuts"
-			:size="size"
-		/>
-	</el-card>
+	<div class="m-4">
+		<p>default</p>
+		<el-select v-model="value1" multiple placeholder="Select" style="width: 240px" @change="printOp">
+			<el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value" />
+		</el-select>
+	</div>
+	<div class="m-4">
+		<p>use collapse-tags</p>
+		<el-select v-model="value2" multiple collapse-tags placeholder="Select" style="width: 240px">
+			<el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value" />
+		</el-select>
+	</div>
+	<div class="m-4">
+		<p>use collapse-tags-tooltip</p>
+		<el-select v-model="value3" multiple collapse-tags collapse-tags-tooltip placeholder="Select" style="width: 240px">
+			<el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value" />
+		</el-select>
+	</div>
 </template>
 
 <script lang="ts" setup>
 import { ref } from 'vue'
 
-const value2 = ref('')
-
-const shortcuts = [
+const value1 = ref([])
+const value2 = ref([])
+const value3 = ref([])
+const options = [
 	{
-		text: 'Last week',
-		value: () => {
-			const end = new Date()
-			const start = new Date()
-			start.setTime(start.getTime() - 3600 * 1000 * 24 * 7)
-			return [start, end]
-		}
+		value: 'Option1',
+		label: 'Option1'
 	},
 	{
-		text: 'Last month',
-		value: () => {
-			const end = new Date()
-			const start = new Date()
-			start.setTime(start.getTime() - 3600 * 1000 * 24 * 30)
-			return [start, end]
-		}
+		value: 'Option2',
+		label: 'Option2'
 	},
 	{
-		text: 'Last 3 months',
-		value: () => {
-			const end = new Date()
-			const start = new Date()
-			start.setTime(start.getTime() - 3600 * 1000 * 24 * 90)
-			return [start, end]
-		}
+		value: 'Option3',
+		label: 'Option3'
+	},
+	{
+		value: 'Option4',
+		label: 'Option4'
+	},
+	{
+		value: 'Option5',
+		label: 'Option5'
 	}
 ]
+
+const printOp = () => {
+	console.log(value1.value.toString())
+}
 </script>
