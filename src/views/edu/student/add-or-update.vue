@@ -1,7 +1,19 @@
 <template>
 	<el-dialog v-model="visible" :title="!dataForm.id ? '新增' : '修改'" :close-on-click-modal="false">
 		<el-form ref="dataFormRef" :model="dataForm" :rules="dataRules" label-width="100px" @keyup.enter="submitHandle()">
-	    		</el-form>
+			<el-form-item label="学号" prop="no">
+				<el-input v-model="dataForm.no" placeholder="学号"></el-input>
+			</el-form-item>
+			<el-form-item label="姓名" prop="name">
+				<el-input v-model="dataForm.name" placeholder="姓名"></el-input>
+			</el-form-item>
+			<el-form-item prop="gender" label="性别">
+				<fast-select v-model="dataForm.gender" dict-type="user_gender" placeholder="性别" style="width: 100%"></fast-select>
+			</el-form-item>
+			<el-form-item prop="clazzId" label="班级">
+				<fast-select v-model="dataForm.clazzId" dict-type="clazz_dict" placeholder="班级" style="width: 100%"></fast-select>
+			</el-form-item>
+		</el-form>
 		<template #footer>
 			<el-button @click="visible = false">取消</el-button>
 			<el-button type="primary" @click="submitHandle()">确定</el-button>
@@ -20,6 +32,12 @@ const visible = ref(false)
 const dataFormRef = ref()
 
 const dataForm = reactive({
+	id: '',
+	no: '',
+	name: '',
+	gender: '',
+	gradeId: '',
+	clazzId: ''
 })
 
 const init = (id?: number) => {
@@ -42,8 +60,7 @@ const getStudent = (id: number) => {
 	})
 }
 
-const dataRules = ref({
-})
+const dataRules = ref({})
 
 // 表单提交
 const submitHandle = () => {
