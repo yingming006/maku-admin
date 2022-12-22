@@ -18,8 +18,9 @@
 			<fast-table-column prop="gradeId" label="年级" dict-type="grade_dict"></fast-table-column>
 			<fast-table-column prop="semesterId" label="学期" dict-type="semester_dict"></fast-table-column>
 			<fast-table-column prop="headmasterId" label="班主任" dict-type="teacher_dict"></fast-table-column>
-			<el-table-column label="操作" fixed="right" header-align="center" align="center" width="150">
+			<el-table-column label="操作" fixed="right" header-align="center" align="center" width="250">
 				<template #default="scope">
+					<el-button v-auth="'edu:clazz:update'" type="primary" link @click="setCourseHandle(scope.row.id)">开设课程 </el-button>
 					<el-button v-auth="'edu:clazz:update'" type="primary" link @click="addOrUpdateHandle(scope.row.id)">修改 </el-button>
 					<el-button v-auth="'edu:clazz:delete'" type="primary" link @click="deleteBatchHandle(scope.row.id)">删除 </el-button>
 				</template>
@@ -38,6 +39,8 @@
 
 		<!-- 弹窗, 新增 / 修改 -->
 		<add-or-update ref="addOrUpdateRef" @refreshDataList="getDataList"></add-or-update>
+		<!-- 弹窗， 开设课程-->
+		<edit-course ref="setCourseRef"></edit-course>
 	</el-card>
 </template>
 
@@ -47,6 +50,7 @@ import { reactive, ref } from 'vue'
 import AddOrUpdate from './add-or-update.vue'
 import { IHooksOptions } from '@/hooks/interface'
 import FastTableColumn from '@/components/fast-table-column/src/fast-table-column.vue'
+import EditCourse from '@/views/edu/clazz/edit-course.vue'
 
 const state: IHooksOptions = reactive({
 	dataListUrl: '/edu/clazz/page',
@@ -57,6 +61,11 @@ const state: IHooksOptions = reactive({
 const addOrUpdateRef = ref()
 const addOrUpdateHandle = (id?: number) => {
 	addOrUpdateRef.value.init(id)
+}
+
+const setCourseRef = ref()
+const setCourseHandle = (id?: number) => {
+	setCourseRef.value.init(id)
 }
 
 const { getDataList, selectionChangeHandle, sizeChangeHandle, currentChangeHandle, deleteBatchHandle } = useCrud(state)
