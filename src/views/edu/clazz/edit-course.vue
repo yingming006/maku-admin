@@ -43,7 +43,6 @@ const init = (id?: number) => {
 
 	// 重置表单数据
 	if (dataFormRef.value) {
-		console.log(1)
 		dataFormRef.value.resetFields()
 		title.value = '开设课程'
 		dataForm.courseList = ''
