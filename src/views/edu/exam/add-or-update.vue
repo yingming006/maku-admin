@@ -104,7 +104,7 @@ const getExam = (id: number) => {
 		// 已经开设的课程
 		for (let element of courseList) {
 			if (dataForm.courseList != null) {
-				element.value = dataForm.courseList.indexOf(element.dictLabel) >= 0
+				element.value = dataForm.courseList.indexOf(element.dictValue + ',') >= 0
 			} else {
 				element.value = false
 			}
@@ -124,7 +124,7 @@ const submitHandle = () => {
 		dataForm.courseList = ''
 		for (let element of courseList) {
 			if (element.value) {
-				dataForm.courseList += element.dictLabel + ','
+				dataForm.courseList += element.dictValue + ','
 			}
 		}
 

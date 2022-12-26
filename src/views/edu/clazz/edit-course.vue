@@ -17,7 +17,7 @@
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
 import { useClazzApi, useClazzSubmitApi } from '@/api/edu/clazz'
-import { getDictDataList } from '@/utils/tool'
+import { getDictDataList, getDictLabel } from '@/utils/tool'
 import store from '@/store'
 import { ElMessage } from 'element-plus'
 
@@ -29,6 +29,7 @@ const dataFormRef = ref()
 const dataForm = reactive({
 	id: '',
 	name: '',
+	gradeId: '',
 	gradeName: '',
 	courseList: ''
 })
@@ -56,11 +57,14 @@ const init = (id?: number) => {
 const getClazz = (id: number) => {
 	useClazzApi(id).then(res => {
 		Object.assign(dataForm, res.data)
+
+		dataForm.gradeName = getDictLabel(store.appStore.dictList, 'grade_dict', dataForm.gradeId)
 		title.value = dataForm.gradeName + dataForm.name + title.value
+
 		// 已经开设的课程
 		for (let element of courseList) {
 			if (dataForm.courseList != null) {
-				element.value = dataForm.courseList.indexOf(element.dictLabel) >= 0
+				element.value = dataForm.courseList.indexOf(element.dictValue + ',') >= 0
 			} else {
 				element.value = false
 			}
@@ -80,7 +84,7 @@ const submitHandle = () => {
 		dataForm.courseList = ''
 		for (let element of courseList) {
 			if (element.value) {
-				dataForm.courseList += element.dictLabel + ','
+				dataForm.courseList += element.dictValue + ','
 			}
 		}
 
