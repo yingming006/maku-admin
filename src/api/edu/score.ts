@@ -11,3 +11,5 @@ export const useScoreSubmitApi = (dataForm: any) => {
 		return service.post('/edu/score', dataForm)
 	}
 }
+
+// export const useExamScoreApi = ()
