@@ -20,20 +20,36 @@
 				<el-button v-auth="'edu:score:delete'" type="danger" @click="deleteBatchHandle()"> 删除 </el-button>
 			</el-form-item>
 		</el-form>
-		<el-table v-loading="state.dataListLoading" :data="state.dataList" border style="width: 100%" @selection-change="selectionChangeHandle">
+		<el-table
+			v-loading="state.dataListLoading"
+			:data="state.dataList"
+			height="600"
+			border
+			style="width: 100%"
+			@selection-change="selectionChangeHandle"
+			@sort-change="sortChangeHandle"
+		>
 			<el-table-column type="selection" header-align="center" align="center" width="50"></el-table-column>
-			<el-table-column prop="studentNo" label="学生学号" header-align="center" align="center"></el-table-column>
-			<el-table-column prop="studentName" label="学生姓名" header-align="center" align="center"></el-table-column>
+			<el-table-column fixed sortable="custom" prop="studentNo" label="学生学号" header-align="center" align="center"></el-table-column>
+			<el-table-column fixed prop="studentName" label="学生姓名" header-align="center" align="center"></el-table-column>
 			<el-table-column
 				v-for="data in courseList"
+				sortable
 				:prop="'scoreList.course_' + data.dictValue"
 				:label="data.dictLabel"
 				header-align="center"
 				align="center"
-			></el-table-column>
+			>
+				<!--				<template #default="scope">-->
+				<!--					<span v-if="scope.row['scoreList']['course_' + data.dictValue] != '-1'">{{ scope.row['scoreList']['course_' + data.dictValue] }}</span>-->
+				<!--					<span v-else>缺考</span>-->
+				<!--				</template>-->
+			</el-table-column>
 			<el-table-column label="操作" fixed="right" header-align="center" align="center" width="150">
 				<template #default="scope">
-					<el-button v-auth="'edu:score:update'" type="primary" link @click="addOrUpdateHandle(scope.row.id)">修改 </el-button>
+					<el-button v-auth="'edu:score:update'" type="primary" link @click="addOrUpdateHandle(state.queryForm.examId, scope.row.studentId)"
+						>修改
+					</el-button>
 					<el-button v-auth="'edu:score:delete'" type="primary" link @click="deleteBatchHandle(scope.row.id)">删除 </el-button>
 				</template>
 			</el-table-column>
@@ -66,6 +82,7 @@ import { useCrud } from '@/hooks'
 
 const state: IHooksOptions = reactive({
 	createdIsNeed: false,
+	limit: 100000,
 	dataListUrl: '/edu/score/page',
 	deleteUrl: '/edu/score',
 	queryForm: {
@@ -118,9 +135,9 @@ const getClazzScore = (val: String) => {
 }
 
 const addOrUpdateRef = ref()
-const addOrUpdateHandle = (id?: number) => {
-	addOrUpdateRef.value.init(id)
+const addOrUpdateHandle = (examId?: number, studentId?: number) => {
+	addOrUpdateRef.value.init(examId, studentId)
 }
 
-const { getDataList, selectionChangeHandle, sizeChangeHandle, currentChangeHandle, deleteBatchHandle } = useCrud(state)
+const { getDataList, selectionChangeHandle, sortChangeHandle, sizeChangeHandle, currentChangeHandle, deleteBatchHandle } = useCrud(state)
 </script>

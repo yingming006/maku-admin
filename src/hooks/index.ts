@@ -3,6 +3,7 @@ import service from '@/utils/request'
 import { onMounted } from 'vue'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import axios from 'axios'
+import { toLine } from '@/utils/tool'
 
 export const useCrud = (options: IHooksOptions) => {
 	const defaultOptions: IHooksOptions = {
@@ -15,7 +16,7 @@ export const useCrud = (options: IHooksOptions) => {
 		queryForm: {},
 		dataList: [],
 		order: '',
-		asc: false,
+		asc: true,
 		page: 1,
 		limit: 10,
 		total: 0,
@@ -93,9 +94,11 @@ export const useCrud = (options: IHooksOptions) => {
 	const sortChangeHandle = (data: any) => {
 		const { prop, order } = data
 
+		console.log(data)
+
 		if (prop && order) {
-			state.order = prop
-			state.asc = order === 'ascending'
+			state.order = toLine(prop)
+			state.asc = order !== 'ascending'
 		} else {
 			state.order = ''
 		}
