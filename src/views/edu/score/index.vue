@@ -16,9 +16,6 @@
 			<el-form-item>
 				<el-button v-auth="'edu:score:save'" type="primary" @click="addOrUpdateHandle()"> 新增 </el-button>
 			</el-form-item>
-			<el-form-item>
-				<el-button v-auth="'edu:score:delete'" type="danger" @click="deleteBatchHandle()"> 删除 </el-button>
-			</el-form-item>
 		</el-form>
 		<el-table
 			v-loading="state.dataListLoading"
@@ -50,7 +47,6 @@
 					<el-button v-auth="'edu:score:update'" type="primary" link @click="addOrUpdateHandle(state.queryForm.examId, scope.row.studentId)"
 						>修改
 					</el-button>
-					<el-button v-auth="'edu:score:delete'" type="primary" link @click="deleteBatchHandle(scope.row.id)">删除 </el-button>
 				</template>
 			</el-table-column>
 		</el-table>
@@ -139,5 +135,5 @@ const addOrUpdateHandle = (examId?: number, studentId?: number) => {
 	addOrUpdateRef.value.init(examId, studentId)
 }
 
-const { getDataList, selectionChangeHandle, sortChangeHandle, sizeChangeHandle, currentChangeHandle, deleteBatchHandle } = useCrud(state)
+const { getDataList, selectionChangeHandle, sortChangeHandle, sizeChangeHandle, currentChangeHandle } = useCrud(state)
 </script>

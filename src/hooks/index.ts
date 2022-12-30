@@ -94,8 +94,6 @@ export const useCrud = (options: IHooksOptions) => {
 	const sortChangeHandle = (data: any) => {
 		const { prop, order } = data
 
-		console.log(data)
-
 		if (prop && order) {
 			state.order = toLine(prop)
 			state.asc = order !== 'ascending'
