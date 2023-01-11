@@ -2,7 +2,14 @@
 	<el-card>
 		<el-form :inline="true" :model="state.queryForm" @keyup.enter="getDataList()">
 			<el-form-item>
-				<fast-select v-model="state.queryForm.examId" dict-type="exam_dict" placeholder="考试" clearable @change="getExamClazzAndScore"></fast-select>
+				<fast-select
+					v-model="state.queryForm.examId"
+					dict-type="exam_dict"
+					placeholder="考试"
+					clearable
+					style="width: 320px"
+					@change="getExamClazzAndScore"
+				></fast-select>
 			</el-form-item>
 			<el-form-item>
 				<el-select v-model="state.queryForm.clazzId" placeholder="班级" clearable @change="getClazzScore">
@@ -20,7 +27,6 @@
 		<el-table
 			v-loading="state.dataListLoading"
 			:data="state.dataList"
-			height="600"
 			border
 			style="width: 100%"
 			@selection-change="selectionChangeHandle"

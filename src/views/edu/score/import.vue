@@ -2,15 +2,26 @@
 	<el-card>
 		<el-form :inline="true" :model="state.queryForm">
 			<el-form-item>
-				<fast-select v-model="state.queryForm.examId" dict-type="exam_dict" placeholder="考试" clearable disabled></fast-select>
+				<fast-select v-model="state.queryForm.examId" dict-type="exam_dict" placeholder="考试" clearable disabled style="width: 320px"></fast-select>
 			</el-form-item>
 			<el-form-item>
 				<el-select v-model="state.queryForm.clazzId" placeholder="班级" clearable @change="getClazzScore">
 					<el-option v-for="data in clazzList" :key="data.dictValue" :label="data.dictLabel" :value="data.dictValue">{{ data.dictLabel }}</el-option>
 				</el-select>
 			</el-form-item>
+			<el-form-item>
+				<el-button @click="getDataList()">刷新</el-button>
+			</el-form-item>
+			<el-form-item>
+				<el-button v-auth="'edu:score:export'" type="primary" @click="downloadTemp()">下载模板</el-button>
+			</el-form-item>
+			<el-form-item>
+				<el-upload :action="uploadExcelUrl" :data="state.queryForm" :before-upload="beforeUpload" :on-success="handleSuccess" :show-file-list="false">
+					<el-button v-auth="'edu:score:import'" type="info">导入</el-button>
+				</el-upload>
+			</el-form-item>
 		</el-form>
-		<el-table v-loading="state.dataListLoading" :data="state.dataList" height="600" border style="width: 100%">
+		<el-table v-loading="state.dataListLoading" :data="state.dataList" border style="width: 100%">
 			<el-table-column type="selection" header-align="center" align="center" width="50"></el-table-column>
 			<el-table-column fixed sortable="custom" prop="studentNo" label="学生学号" header-align="center" align="center"></el-table-column>
 			<el-table-column fixed prop="studentName" label="学生姓名" header-align="center" align="center"></el-table-column>
@@ -33,7 +44,7 @@
 		</el-table>
 
 		<!-- 弹窗, 新增 / 修改 -->
-		<!--		<add-or-update ref="addOrUpdateRef" @refreshDataList="getDataList"></add-or-update>-->
+		<add-or-update ref="addOrUpdateRef" @refreshDataList="getDataList"></add-or-update>
 	</el-card>
 </template>
 
@@ -48,6 +59,11 @@ import { useExamApi } from '@/api/edu/exam'
 import { useCrud } from '@/hooks'
 import { useRoute } from 'vue-router'
 import { handleThemeStyle } from '@/utils/theme'
+import { useLogLoginExportApi } from '@/api/sys/log'
+import { userScoreExcelTemplateExport } from '@/api/edu/score'
+import { ElMessage, UploadProps } from 'element-plus'
+import constant from '@/utils/constant'
+import cache from '@/utils/cache'
 
 const state: IHooksOptions = reactive({
 	createdIsNeed: false,
@@ -59,6 +75,8 @@ const state: IHooksOptions = reactive({
 		clazzId: ''
 	}
 })
+
+const uploadExcelUrl = constant.apiUrl + '/edu/score/import/' + '?access_token=' + cache.getToken()
 
 const route = useRoute()
 
@@ -85,7 +103,6 @@ const getExamClazzAndScore = (val: String) => {
 		for (let element of clazzListDict) {
 			if (res.data.clazzList.find((item: String) => item == element.dictValue)) {
 				clazzList.value.push(element)
-				console.log(clazzList)
 			}
 		}
 
@@ -100,6 +117,8 @@ const getExamClazzAndScore = (val: String) => {
 			}
 		}
 	})
+
+	getDataList()
 }
 
 const getClazzScore = (val: String) => {
@@ -110,6 +129,34 @@ const getClazzScore = (val: String) => {
 const addOrUpdateRef = ref()
 const addOrUpdateHandle = (examId?: number, studentId?: number) => {
 	addOrUpdateRef.value.init(examId, studentId)
+}
+
+const downloadTemp = () => {
+	userScoreExcelTemplateExport(state.queryForm.examId)
+	return
+}
+
+const handleSuccess: UploadProps['onSuccess'] = (res, file) => {
+	if (res.code !== 0) {
+		ElMessage.error('上传失败：' + res.msg)
+		return false
+	}
+
+	ElMessage.success({
+		message: '上传成功',
+		duration: 500,
+		onClose: () => {
+			getDataList()
+		}
+	})
+}
+
+const beforeUpload: UploadProps['beforeUpload'] = file => {
+	if (file.size / 1024 / 1024 / 1024 / 1024 > 1) {
+		ElMessage.error('文件大小不能超过100M')
+		return false
+	}
+	return true
 }
 
 const { getDataList } = useCrud(state)
