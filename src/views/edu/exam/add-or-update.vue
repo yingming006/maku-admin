@@ -73,7 +73,7 @@ const dataForm = reactive({
 	dateRange: ref<[dayjs.ConfigType, dayjs.ConfigType]>(),
 	startDate: '',
 	endDate: '',
-	courseList: ''
+	courseList: []
 })
 
 const init = (id?: number) => {
@@ -83,7 +83,7 @@ const init = (id?: number) => {
 	// 重置表单数据
 	if (dataFormRef.value) {
 		dataFormRef.value.resetFields()
-		dataForm.courseList = ''
+		dataForm.courseList = []
 	}
 
 	if (id) {
@@ -99,12 +99,15 @@ const getExam = (id: number) => {
 	useExamApi(id).then(res => {
 		Object.assign(dataForm, res.data)
 
+		console.log(dataForm)
+
 		dataForm.dateRange = [dayjs(res.data.startDate), dayjs(res.data.endDate)]
 
 		// 已经开设的课程
 		for (let element of courseList) {
-			if (dataForm.courseList != null) {
-				element.value = dataForm.courseList.indexOf(element.dictValue + ',') >= 0
+			if (Array.isArray(dataForm.courseList) && dataForm.courseList.length > 0) {
+				element.value = dataForm.courseList.find((course: any) => course === element.dictValue)
+				// element.value = dataForm.courseList.indexOf(element.dictValue + ',') >= 0
 			} else {
 				element.value = false
 			}
@@ -121,12 +124,14 @@ const submitHandle = () => {
 			return false
 		}
 
-		dataForm.courseList = ''
+		dataForm.courseList = []
 		for (let element of courseList) {
 			if (element.value) {
-				dataForm.courseList += element.dictValue + ','
+				dataForm.courseList.push(element.dictValue)
 			}
 		}
+
+		console.log('submit', dataForm)
 
 		useExamSubmitApi(dataForm).then(() => {
 			ElMessage.success({
