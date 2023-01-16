@@ -13,7 +13,7 @@
 					></fast-select>
 				</el-form-item>
 				<el-form-item>
-					<el-select v-model="state.queryForm.clazzId" placeholder="班级" clearable @change="getDataList">
+					<el-select v-model="state.queryForm.clazzId" placeholder="班级" clearable @change="changeClazzHandle">
 						<el-option v-for="data in clazzList" :key="data.dictValue" :label="data.dictLabel" :value="data.dictValue">{{
 							data.dictLabel
 						}}</el-option>
@@ -72,6 +72,10 @@ const init = (examId?: number, clazzId?: number) => {
 	courseList.value = []
 	state.dataList = []
 	getExamAndClazz()
+
+	if (state.queryForm.clazzId != '') {
+		getDataList()
+	}
 }
 
 const clazzListDict = getDictDataList(store.appStore.dictList, 'clazz_dict')
@@ -106,8 +110,17 @@ const getExamAndClazz = () => {
 }
 
 const importTemplateHandle = () => {
-	userScoreExcelTemplateExport(state.queryForm.examId, state.queryForm.clazzId)
+	userScoreExcelTemplateExport(state.queryForm)
 	return
+}
+
+const changeClazzHandle = (val: string) => {
+	if (val == '') {
+		state.dataList = []
+	} else {
+		getDataList()
+	}
+	console.log(state.queryForm)
 }
 
 defineExpose({

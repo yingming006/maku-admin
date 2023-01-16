@@ -27,12 +27,14 @@
 		<el-table
 			v-loading="state.dataListLoading"
 			:data="state.dataList"
+			highlight-current-row
 			border
 			style="width: 100%"
 			@selection-change="selectionChangeHandle"
 			@sort-change="sortChangeHandle"
 		>
-			<el-table-column type="selection" header-align="center" align="center" width="50"></el-table-column>
+			<!--			<el-table-column type="selection" header-align="center" align="center" width="50"></el-table-column>-->
+			<!--			<el-table-column fixed type="index" label="排名" header-align="center" align="center" width="100"></el-table-column>-->
 			<el-table-column fixed sortable="custom" prop="studentNo" label="学生学号" header-align="center" align="center"></el-table-column>
 			<el-table-column fixed prop="studentName" label="学生姓名" header-align="center" align="center"></el-table-column>
 			<el-table-column

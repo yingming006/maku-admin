@@ -24,7 +24,7 @@
 			</el-form-item>
 		</el-form>
 		<el-table v-loading="state.dataListLoading" :data="state.dataList" border style="width: 100%">
-			<el-table-column type="selection" header-align="center" align="center" width="50"></el-table-column>
+			<!--			<el-table-column type="selection" header-align="center" align="center" width="50"></el-table-column>-->
 			<el-table-column fixed sortable="custom" prop="studentNo" label="学生学号" header-align="center" align="center"></el-table-column>
 			<el-table-column fixed prop="studentName" label="学生姓名" header-align="center" align="center"></el-table-column>
 			<el-table-column
@@ -61,9 +61,6 @@ import store from '@/store'
 import { useExamApi } from '@/api/edu/exam'
 import { useCrud } from '@/hooks'
 import { useRoute } from 'vue-router'
-import { handleThemeStyle } from '@/utils/theme'
-import { useLogLoginExportApi } from '@/api/sys/log'
-import { userScoreExcelTemplateExport } from '@/api/edu/score'
 import { ElMessage, UploadProps } from 'element-plus'
 import constant from '@/utils/constant'
 import cache from '@/utils/cache'
