@@ -110,19 +110,14 @@ const getExamClazzAndScore = (val: String) => {
 
 	useExamApi(Number(val)).then(res => {
 		for (let element of clazzListDict) {
-			if (res.data.clazzList.find((item: String) => item == element.dictValue)) {
+			if (res.data.clazzList.includes(element.dictValue)) {
 				clazzList.value.push(element)
 			}
 		}
 
-		let courseStr = res.data.courseList
-		if (courseStr && courseStr.length > 0) {
-			courseStr = courseStr.substring(0, courseStr.length - 1)
-			let courseStrList = courseStr.split(',')
-			for (let element of courseListDict) {
-				if (courseStrList.find((item: String) => item == element.dictValue)) {
-					courseList.value.push(element)
-				}
+		for (let element of courseListDict) {
+			if (res.data.courseList.includes(element.dictValue)) {
+				courseList.value.push(element)
 			}
 		}
 	})

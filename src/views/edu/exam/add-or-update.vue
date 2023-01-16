@@ -73,7 +73,7 @@ const dataForm = reactive({
 	dateRange: ref<[dayjs.ConfigType, dayjs.ConfigType]>(),
 	startDate: '',
 	endDate: '',
-	courseList: []
+	courseList: [] as string[]
 })
 
 const init = (id?: number) => {
@@ -99,15 +99,12 @@ const getExam = (id: number) => {
 	useExamApi(id).then(res => {
 		Object.assign(dataForm, res.data)
 
-		console.log(dataForm)
-
 		dataForm.dateRange = [dayjs(res.data.startDate), dayjs(res.data.endDate)]
 
 		// 已经开设的课程
 		for (let element of courseList) {
 			if (Array.isArray(dataForm.courseList) && dataForm.courseList.length > 0) {
-				element.value = dataForm.courseList.find((course: any) => course === element.dictValue)
-				// element.value = dataForm.courseList.indexOf(element.dictValue + ',') >= 0
+				element.value = dataForm.courseList.includes(element.dictValue)
 			} else {
 				element.value = false
 			}
@@ -130,8 +127,6 @@ const submitHandle = () => {
 				dataForm.courseList.push(element.dictValue)
 			}
 		}
-
-		console.log('submit', dataForm)
 
 		useExamSubmitApi(dataForm).then(() => {
 			ElMessage.success({

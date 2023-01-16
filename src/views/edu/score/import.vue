@@ -5,7 +5,7 @@
 				<fast-select v-model="state.queryForm.examId" dict-type="exam_dict" placeholder="考试" clearable disabled style="width: 320px"></fast-select>
 			</el-form-item>
 			<el-form-item>
-				<el-select v-model="state.queryForm.clazzId" placeholder="班级" clearable @change="getClazzScore">
+				<el-select v-model="state.queryForm.clazzId" placeholder="班级" clearable @change="getDataList">
 					<el-option v-for="data in clazzList" :key="data.dictValue" :label="data.dictLabel" :value="data.dictValue">{{ data.dictLabel }}</el-option>
 				</el-select>
 			</el-form-item>
@@ -13,7 +13,9 @@
 				<el-button @click="getDataList()">刷新</el-button>
 			</el-form-item>
 			<el-form-item>
-				<el-button v-auth="'edu:score:export'" type="primary" @click="downloadTemp()">下载模板</el-button>
+				<el-button v-auth="'edu:score:export'" type="primary" @click="importTemplateHandle(state.queryForm.examId, state.queryForm.clazzId)"
+					>下载模板</el-button
+				>
 			</el-form-item>
 			<el-form-item>
 				<el-upload :action="uploadExcelUrl" :data="state.queryForm" :before-upload="beforeUpload" :on-success="handleSuccess" :show-file-list="false">
@@ -45,11 +47,12 @@
 
 		<!-- 弹窗, 新增 / 修改 -->
 		<add-or-update ref="addOrUpdateRef" @refreshDataList="getDataList"></add-or-update>
+		<import-template ref="importTemplateRef" @refreshDataList="getDataList"></import-template>
 	</el-card>
 </template>
 
 <script setup lang="ts" name="EduScoreIndex">
-import { nextTick, onMounted, reactive, ref } from 'vue'
+import { onMounted, reactive, ref } from 'vue'
 import AddOrUpdate from './add-or-update.vue'
 import { IHooksOptions } from '@/hooks/interface'
 import FastSelect from '@/components/fast-select/src/fast-select.vue'
@@ -64,6 +67,7 @@ import { userScoreExcelTemplateExport } from '@/api/edu/score'
 import { ElMessage, UploadProps } from 'element-plus'
 import constant from '@/utils/constant'
 import cache from '@/utils/cache'
+import ImportTemplate from '@/views/edu/score/importTemplate.vue'
 
 const state: IHooksOptions = reactive({
 	createdIsNeed: false,
@@ -101,28 +105,18 @@ const getExamClazzAndScore = (val: String) => {
 
 	useExamApi(Number(val)).then(res => {
 		for (let element of clazzListDict) {
-			if (res.data.clazzList.find((item: String) => item == element.dictValue)) {
+			if (res.data.clazzList.includes(element.dictValue)) {
 				clazzList.value.push(element)
 			}
 		}
 
-		let courseStr = res.data.courseList
-		if (courseStr && courseStr.length > 0) {
-			courseStr = courseStr.substring(0, courseStr.length - 1)
-			let courseStrList = courseStr.split(',')
-			for (let element of courseListDict) {
-				if (courseStrList.find((item: String) => item == element.dictValue)) {
-					courseList.value.push(element)
-				}
+		for (let element of courseListDict) {
+			if (res.data.courseList.includes(element.dictValue)) {
+				courseList.value.push(element)
 			}
 		}
 	})
 
-	getDataList()
-}
-
-const getClazzScore = (val: String) => {
-	state.queryForm.clazzId = val
 	getDataList()
 }
 
@@ -131,9 +125,9 @@ const addOrUpdateHandle = (examId?: number, studentId?: number) => {
 	addOrUpdateRef.value.init(examId, studentId)
 }
 
-const downloadTemp = () => {
-	userScoreExcelTemplateExport(state.queryForm.examId)
-	return
+const importTemplateRef = ref()
+const importTemplateHandle = (examId?: number, clazzId?: number) => {
+	importTemplateRef.value.init(examId, clazzId)
 }
 
 const handleSuccess: UploadProps['onSuccess'] = (res, file) => {

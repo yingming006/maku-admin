@@ -59,8 +59,6 @@ const getScore = (examId?: number, studentId?: number) => {
 	useScoreApi(examId, studentId).then(res => {
 		Object.assign(dataForm, res.data)
 
-		console.log(dataForm)
-
 		dataForm.scoreDetailList = []
 		for (let entry of Object.entries(dataForm.scoreList)) {
 			let courseId = entry[0].split('_')[1]

@@ -15,6 +15,6 @@ export const useScoreSubmitApi = (dataForm: any) => {
 }
 
 // 模板导出
-export const userScoreExcelTemplateExport = (examId: number) => {
-	location.href = constant.apiUrl + '/edu/score/exportTemplate/' + examId + '?access_token=' + cache.getToken()
+export const userScoreExcelTemplateExport = (examId: number, clazzId: number) => {
+	location.href = constant.apiUrl + '/edu/score/exportTemplate/' + examId + '/' + clazzId + '?access_token=' + cache.getToken()
 }
