@@ -87,11 +87,11 @@
 				<el-divider />
 
 				<el-space direction="vertical">
-<!--					<el-alert :title="$t('settings.tips')" type="warning" :closable="false"> </el-alert>-->
+					<!--					<el-alert :title="$t('settings.tips')" type="warning" :closable="false"> </el-alert>-->
 					<div class="config-btn">
-<!--						<el-button type="primary" size="default" :icon="CopyDocument" @click="handleCopyConfig">-->
-<!--							{{ $t('settings.copyConfig') }}-->
-<!--						</el-button>-->
+						<!--						<el-button type="primary" size="default" :icon="CopyDocument" @click="handleCopyConfig">-->
+						<!--							{{ $t('settings.copyConfig') }}-->
+						<!--						</el-button>-->
 						<el-button type="info" size="large" :icon="RefreshRight" @click="handleResetConfig">
 							{{ $t('settings.reset') }}
 						</el-button>
@@ -106,14 +106,15 @@
 import store from '@/store'
 import { computed, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
-import { CopyDocument, RefreshRight } from '@element-plus/icons-vue'
+import { RefreshRight } from '@element-plus/icons-vue'
 import { useClipboard, useDark } from '@vueuse/core'
 import SwitchItem from './components/SwitchItem.vue'
 import SelectItem from './components/SelectItem.vue'
 import { ElMessage } from 'element-plus'
-import { handleThemeStyle } from '@/utils/theme'
+import { handleThemeStyle } from '@/utils/common/theme'
 import cache from '@/utils/cache'
-import emits from '@/utils/emits'
+import emits from '@/utils/common/emits'
+import SvgIcon from '@/components/svg-icon/src/svg-icon.vue'
 
 const { t } = useI18n()
 const { copy } = useClipboard()

@@ -18,7 +18,8 @@
 import { computed, PropType } from 'vue'
 import { useRouter } from 'vue-router'
 import store from '@/store'
-import { isExternalLink, replaceLinkParam } from '@/utils/tool'
+import { isExternalLink, replaceLinkParam } from '@/utils/common/tool'
+import SvgIcon from '@/components/svg-icon/src/svg-icon.vue'
 
 // 显示icon图标
 const showIcon = computed(() => {

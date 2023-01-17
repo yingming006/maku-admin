@@ -1,4 +1,4 @@
-import { SessionStorage, Storage } from '@/utils/storage'
+import { SessionStorage, Storage } from '@/utils/common/storage'
 import CacheKey from '@/utils/cache/key'
 import { ITheme } from '@/store/theme/interface'
 import { themeConfig } from '@/store/theme/config'

@@ -41,7 +41,7 @@
 </template>
 
 <script setup lang="ts" name="MessageSmsLogIndex">
-import { useCrud } from '@/hooks'
+import { useCrud } from '@/hooks/useCrud'
 import { reactive, ref } from 'vue'
 import Detail from './detail.vue'
 import { IHooksOptions } from '@/hooks/interface'

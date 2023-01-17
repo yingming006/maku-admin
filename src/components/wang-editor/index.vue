@@ -18,7 +18,7 @@
 <script lang="ts" setup>
 import '@wangeditor/editor/dist/css/style.css'
 import { onBeforeUnmount, shallowRef } from 'vue'
-import constant from '@/utils/constant'
+import constant from '@/utils/common/constant'
 import { Editor, Toolbar } from '@wangeditor/editor-for-vue'
 import { IDomEditor, IEditorConfig } from '@wangeditor/editor'
 

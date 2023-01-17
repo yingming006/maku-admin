@@ -3,7 +3,7 @@ import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
 import store from '@/store'
 import { i18n } from '@/i18n'
-import { isExternalLink, pathToCamel } from '@/utils/tool'
+import { isExternalLink, pathToCamel } from '@/utils/common/tool'
 
 NProgress.configure({ showSpinner: false })
 

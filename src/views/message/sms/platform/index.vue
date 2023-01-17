@@ -52,11 +52,12 @@
 </template>
 
 <script setup lang="ts" name="MessageSmsPlatformIndex">
-import { useCrud } from '@/hooks'
+import { useCrud } from '@/hooks/useCrud'
 import { reactive, ref } from 'vue'
 import AddOrUpdate from './add-or-update.vue'
 import Send from './send.vue'
 import { IHooksOptions } from '@/hooks/interface'
+import FastTableColumn from '@/components/fast-table-column/src/fast-table-column.vue'
 
 const state: IHooksOptions = reactive({
 	dataListUrl: '/message/sms/platform/page',

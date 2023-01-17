@@ -58,11 +58,11 @@
 </template>
 
 <script setup lang="ts" name="SysUserIndex">
-import { useCrud } from '@/hooks'
+import { useCrud } from '@/hooks/useCrud'
 import { reactive, ref } from 'vue'
 import AddOrUpdate from './add-or-update.vue'
 import { IHooksOptions } from '@/hooks/interface'
-import constant from '@/utils/constant'
+import constant from '@/utils/common/constant'
 import { useUserExportApi } from '@/api/sys/user'
 import { ElMessage, UploadProps } from 'element-plus'
 import FastTableColumn from '@/components/fast-table-column/src/fast-table-column.vue'

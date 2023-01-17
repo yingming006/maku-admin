@@ -38,7 +38,7 @@
 </template>
 
 <script setup lang="ts" name="EduCourseIndex">
-import { useCrud } from '@/hooks'
+import { useCrud } from '@/hooks/useCrud'
 import { reactive, ref } from 'vue'
 import AddOrUpdate from './add-or-update.vue'
 import { IHooksOptions } from '@/hooks/interface'

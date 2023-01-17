@@ -15,7 +15,7 @@
 
 <script setup lang="ts">
 import { reactive } from 'vue'
-import { useCrud } from '@/hooks'
+import { useCrud } from '@/hooks/useCrud'
 import { IHooksOptions } from '@/hooks/interface'
 
 const props = defineProps({

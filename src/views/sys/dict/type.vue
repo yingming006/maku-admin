@@ -72,7 +72,7 @@
 </template>
 
 <script setup lang="ts" name="SysDictType">
-import { useCrud } from '@/hooks'
+import { useCrud } from '@/hooks/useCrud'
 import { reactive, ref } from 'vue'
 import AddOrUpdate from './type-add-or-update.vue'
 import DataSql from './data-sql.vue'

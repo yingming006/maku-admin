@@ -51,10 +51,10 @@
 </template>
 
 <script setup lang="ts" name="SysAttachmentIndex">
-import { useCrud } from '@/hooks'
+import { useCrud } from '@/hooks/useCrud'
 import { reactive } from 'vue'
-import constant from '@/utils/constant'
-import { convertSizeFormat } from '@/utils/tool'
+import constant from '@/utils/common/constant'
+import { convertSizeFormat } from '@/utils/common/tool'
 import { IHooksOptions } from '@/hooks/interface'
 import { ElMessage } from 'element-plus'
 import type { UploadProps } from 'element-plus'

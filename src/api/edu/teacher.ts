@@ -1,4 +1,4 @@
-import service from '@/utils/request'
+import service from '@/utils/common/request'
 
 export const useTeacherApi = (id: number) => {
 	return service.get('/edu/teacher/' + id)

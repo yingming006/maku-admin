@@ -39,7 +39,7 @@
 </template>
 
 <script setup lang="ts" name="EduGradeIndex">
-import { useCrud } from '@/hooks'
+import { useCrud } from '@/hooks/useCrud'
 import { reactive, ref } from 'vue'
 import { IHooksOptions } from '@/hooks/interface'
 import AddOrUpdate from '@/views/edu/grade/add-or-update.vue'

@@ -1,4 +1,4 @@
-import service from '@/utils/request'
+import service from '@/utils/common/request'
 
 export const useCourseApi = (id: number) => {
 	return service.get('/maku/course/' + id)

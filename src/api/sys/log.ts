@@ -1,5 +1,5 @@
 import cache from '@/utils/cache'
-import constant from '@/utils/constant'
+import constant from '@/utils/common/constant'
 
 // 文件导出
 export const useLogLoginExportApi = () => {

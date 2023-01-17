@@ -1,6 +1,6 @@
-import service from '@/utils/request'
+import service from '@/utils/common/request'
 import cache from '@/utils/cache'
-import constant from '@/utils/constant'
+import constant from '@/utils/common/constant'
 
 export const useUserInfoApi = () => {
 	return service.get('/sys/user/info')

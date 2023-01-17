@@ -13,8 +13,9 @@
 
 <script setup lang="ts">
 import { useClipboard } from '@vueuse/core'
-import { getIconList } from '@/utils/tool'
+import { getIconList } from '@/utils/common/tool'
 import { ElMessage } from 'element-plus'
+import SvgIcon from '@/components/svg-icon/src/svg-icon.vue'
 
 const iconList = getIconList()
 

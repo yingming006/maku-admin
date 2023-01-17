@@ -28,7 +28,7 @@
 import { watch, onMounted, ref, computed } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import store from '@/store'
-import { closeAllTabs, closeOthersTabs, closeTab } from '@/utils/tabs'
+import { closeAllTabs, closeOthersTabs, closeTab } from '@/utils/common/tabs'
 import { ArrowDown, Close, CircleClose, CircleCloseFilled } from '@element-plus/icons-vue'
 
 const route = useRoute()

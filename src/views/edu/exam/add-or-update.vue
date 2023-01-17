@@ -1,7 +1,9 @@
 <template>
 	<el-dialog v-model="visible" :title="!dataForm.id ? '新增' : '修改'" :close-on-click-modal="false">
 		<el-form ref="dataFormRef" :model="dataForm" :rules="dataRules" label-width="100px" @keyup.enter="submitHandle()">
-			<el-form-item label="考试名称" prop="name"> <el-input v-model="dataForm.name" placeholder="考试名称"></el-input> </el-form-item>
+			<el-form-item label="考试名称" prop="name">
+				<el-input v-model="dataForm.name" placeholder="考试名称"></el-input>
+			</el-form-item>
 			<el-form-item prop="type" label="考试类型">
 				<fast-select v-model="dataForm.type" dict-type="exam_type" placeholder="考试类型" style="width: 100%"></fast-select>
 			</el-form-item>
@@ -33,8 +35,22 @@
 				/>
 			</el-form-item>
 			<el-form-item prop="courseList" label="考试科目">
-				<el-col v-for="item in courseList" :span="8">
-					<el-switch v-model="item.value" name="course" inline-prompt :active-text="item.dictLabel" :inactive-text="item.dictLabel" size="large" />
+				<el-col v-for="(item, index) in courseList" :key="index" :span="8">
+					<el-switch
+						v-model="item.value"
+						:name="'course' + index"
+						inline-prompt
+						:active-text="item.dictLabel"
+						:inactive-text="item.dictLabel"
+						@change="
+							val => {
+								changeCourseHandle(val, item)
+							}
+						"
+					/>
+					<el-input v-if="item.value" v-model="item.fullScore" style="width: 130px; margin-left: 10px" @input="checkNumHandle(item)">
+						<template #prepend>满分</template>
+					</el-input>
 				</el-col>
 			</el-form-item>
 		</el-form>
@@ -51,8 +67,9 @@ import { ElMessage } from 'element-plus/es'
 import { useExamApi, useExamSubmitApi } from '@/api/edu/exam'
 import FastSelect from '@/components/fast-select/src/fast-select.vue'
 import { dayjs } from 'element-plus'
-import { getDictDataList } from '@/utils/tool'
+import { getDictDataList } from '@/utils/common/tool'
 import store from '@/store'
+import { checkNum } from '@/utils/common/checkNum'
 
 const emit = defineEmits(['refreshDataList'])
 
@@ -73,7 +90,8 @@ const dataForm = reactive({
 	dateRange: ref<[dayjs.ConfigType, dayjs.ConfigType]>(),
 	startDate: '',
 	endDate: '',
-	courseList: [] as string[]
+	courseList: [] as string[],
+	courseFullScoreList: [] as number[]
 })
 
 const init = (id?: number) => {
@@ -105,6 +123,7 @@ const getExam = (id: number) => {
 		for (let element of courseList) {
 			if (Array.isArray(dataForm.courseList) && dataForm.courseList.length > 0) {
 				element.value = dataForm.courseList.includes(element.dictValue)
+				element.fullScore = dataForm.courseFullScoreList[dataForm.courseList.indexOf(element.dictValue)]
 			} else {
 				element.value = false
 			}
@@ -125,6 +144,7 @@ const submitHandle = () => {
 		for (let element of courseList) {
 			if (element.value) {
 				dataForm.courseList.push(element.dictValue)
+				dataForm.courseFullScoreList.push(element.fullScore)
 			}
 		}
 
@@ -146,8 +166,16 @@ const handleChangeDate = (val: any) => {
 	dataForm.endDate = val[1]
 }
 
+const changeCourseHandle = (val: any, item: any) => {
+	item.fullScore = val ? 100 : 0
+}
+
 const filterMethod = (query: String, item: any) => {
 	return item.dictLabel.includes(query)
+}
+
+const checkNumHandle = (item: any) => {
+	item.fullScore = checkNum({ value: item.fullScore }, 0, 0, 0, 10000, 0)
 }
 
 defineExpose({

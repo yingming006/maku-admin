@@ -41,7 +41,7 @@
 </template>
 
 <script setup lang="ts" name="EduStudentIndex">
-import { useCrud } from '@/hooks'
+import { useCrud } from '@/hooks/useCrud'
 import { reactive, ref } from 'vue'
 import { IHooksOptions } from '@/hooks/interface'
 import FastTableColumn from '@/components/fast-table-column/src/fast-table-column.vue'

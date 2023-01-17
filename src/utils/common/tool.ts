@@ -1,5 +1,5 @@
 import type { App, Plugin } from 'vue'
-import constant from '@/utils/constant'
+import constant from '@/utils/common/constant'
 
 // 把路径转换成驼峰命名
 export const pathToCamel = (path: string): string => {

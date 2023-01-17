@@ -5,7 +5,8 @@
 </template>
 
 <script setup lang="ts">
-import emits from '@/utils/emits'
+import emits from '@/utils/common/emits'
+import SvgIcon from '@/components/svg-icon/src/svg-icon.vue'
 const themeSettingsHandle = () => {
 	emits.emit('openThemeSettings')
 }

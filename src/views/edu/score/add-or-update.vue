@@ -26,7 +26,7 @@ import { reactive, ref } from 'vue'
 import { ElMessage } from 'element-plus/es'
 import { useScoreApi, useScoreSubmitApi } from '@/api/edu/score'
 import FastSelect from '@/components/fast-select/src/fast-select.vue'
-import { getDictLabel } from '@/utils/tool'
+import { getDictLabel } from '@/utils/common/tool'
 import store from '@/store'
 
 const emit = defineEmits(['refreshDataList'])
@@ -65,7 +65,6 @@ const getScore = (examId?: number, studentId?: number) => {
 			let courseName = getDictLabel(store.appStore.dictList, 'course_dict', courseId)
 			dataForm.scoreDetailList.push({ courseId: courseId, courseName: courseName, score: entry[1] })
 		}
-		console.log(dataForm.scoreDetailList)
 	})
 }
 

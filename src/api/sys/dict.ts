@@ -1,4 +1,4 @@
-import service from '@/utils/request'
+import service from '@/utils/common/request'
 
 export const useDictTypeAllApi = () => {
 	return service.get('/sys/dict/type/all')

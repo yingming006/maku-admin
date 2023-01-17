@@ -11,7 +11,7 @@ import { useTitle } from '@vueuse/core'
 import store from '@/store'
 import { useI18n } from 'vue-i18n'
 import { messages } from '@/i18n'
-import { handleThemeStyle } from '@/utils/theme'
+import { handleThemeStyle } from '@/utils/common/theme'
 
 const { t } = useI18n()
 const locale = computed(() => messages[store.appStore.language].el)

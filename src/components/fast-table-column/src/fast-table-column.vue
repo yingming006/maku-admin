@@ -28,7 +28,7 @@
 
 <script setup lang="ts" name="FastTableColumn">
 import store from '@/store'
-import { getDictLabel, getDictLabelClass } from '@/utils/tool'
+import { getDictLabel, getDictLabelClass } from '@/utils/common/tool'
 
 const props = defineProps({
 	prop: {

@@ -44,11 +44,11 @@
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
 import FastSelect from '@/components/fast-select/src/fast-select.vue'
-import { getDictDataList } from '@/utils/tool'
+import { getDictDataList } from '@/utils/common/tool'
 import store from '@/store'
 import { IHooksOptions } from '@/hooks/interface'
 import { useExamApi } from '@/api/edu/exam'
-import { useCrud } from '@/hooks'
+import { useCrud } from '@/hooks/useCrud'
 import { userScoreExcelTemplateExport } from '@/api/edu/score'
 
 const visible = ref(false)
@@ -120,7 +120,6 @@ const changeClazzHandle = (val: string) => {
 	} else {
 		getDataList()
 	}
-	console.log(state.queryForm)
 }
 
 defineExpose({

@@ -6,7 +6,7 @@
 
 <script setup lang="ts" name="FastSelect">
 import store from '@/store'
-import { getDictDataList } from '@/utils/tool'
+import { getDictDataList } from '@/utils/common/tool'
 
 const props = defineProps({
 	modelValue: {

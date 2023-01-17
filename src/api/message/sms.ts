@@ -1,4 +1,4 @@
-import service from '@/utils/request'
+import service from '@/utils/common/request'
 
 export const useSmsPlatformApi = (id: Number) => {
 	return service.get('/message/sms/platform/' + id)

@@ -47,7 +47,7 @@
 </template>
 
 <script setup lang="ts">
-import { useCrud } from '@/hooks'
+import { useCrud } from '@/hooks/useCrud'
 import { reactive, ref } from 'vue'
 import { IHooksOptions } from '@/hooks/interface'
 import FastUser from '@/components/fast-user/src/fast-user.vue'

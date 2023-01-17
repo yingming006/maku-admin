@@ -22,7 +22,7 @@ import store from '@/store'
 import { useSendCodeApi } from '@/api/auth'
 import { useRouter } from 'vue-router'
 import { useI18n } from 'vue-i18n'
-import { validateMobile } from '@/utils/validate'
+import { validateMobile } from '@/utils/common/validate'
 import { ElMessage } from 'element-plus'
 
 // 发送短信验证码

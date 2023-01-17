@@ -74,7 +74,7 @@
 
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
-import { getIconList } from '@/utils/tool'
+import { getIconList } from '@/utils/common/tool'
 import { ElMessage } from 'element-plus/es'
 import { useMenuApi, useMenuListApi, useMenuSubmitApi } from '@/api/sys/menu'
 

@@ -1,4 +1,4 @@
-import service from '@/utils/request'
+import service from '@/utils/common/request'
 
 export const useRoleMenuApi = () => {
 	return service.get('/sys/role/menu')

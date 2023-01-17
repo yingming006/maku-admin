@@ -1,4 +1,4 @@
-import service from '@/utils/request'
+import service from '@/utils/common/request'
 
 export const useOrgListApi = () => {
 	return service.get('/sys/org/list')

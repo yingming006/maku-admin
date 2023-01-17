@@ -1,5 +1,5 @@
-import service from '@/utils/request'
-import constant from '@/utils/constant'
+import service from '@/utils/common/request'
+import constant from '@/utils/common/constant'
 import cache from '@/utils/cache'
 
 export const useScoreApi = (examId?: number, studentId?: number) => {

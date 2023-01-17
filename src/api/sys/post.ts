@@ -1,4 +1,4 @@
-import service from '@/utils/request'
+import service from '@/utils/common/request'
 
 export const usePostApi = (id: Number) => {
 	return service.get('/sys/post/' + id)

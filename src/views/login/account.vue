@@ -24,7 +24,7 @@ import store from '@/store'
 import { useCaptchaApi } from '@/api/auth'
 import { useRouter } from 'vue-router'
 import { useI18n } from 'vue-i18n'
-import constant from '@/utils/constant'
+import constant from '@/utils/common/constant'
 
 const router = useRouter()
 const { t } = useI18n()

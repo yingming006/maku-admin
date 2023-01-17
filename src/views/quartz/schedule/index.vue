@@ -65,13 +65,15 @@
 </template>
 
 <script setup lang="ts" name="QuartzScheduleIndex">
-import { useCrud } from '@/hooks'
+import { useCrud } from '@/hooks/useCrud'
 import { reactive, ref } from 'vue'
 import AddOrUpdate from './add-or-update.vue'
 import Log from '../log/index.vue'
 import { IHooksOptions } from '@/hooks/interface'
 import { useScheduleStatusApi, useScheduleRunApi } from '@/api/quartz/schedule'
 import { ElMessage, ElMessageBox } from 'element-plus/es'
+import FastSelect from '@/components/fast-select/src/fast-select.vue'
+import FastTableColumn from '@/components/fast-table-column/src/fast-table-column.vue'
 
 const state: IHooksOptions = reactive({
 	dataListUrl: '/schedule/page',

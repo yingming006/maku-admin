@@ -42,10 +42,11 @@
 </template>
 
 <script setup lang="ts" name="SysLogLogin">
-import { useCrud } from '@/hooks'
+import { useCrud } from '@/hooks/useCrud'
 import { reactive } from 'vue'
 import { useLogLoginExportApi } from '@/api/sys/log'
 import { IHooksOptions } from '@/hooks/interface'
+import FastTableColumn from '@/components/fast-table-column/src/fast-table-column.vue'
 
 const state: IHooksOptions = reactive({
 	dataListUrl: '/sys/log/login/page',
@@ -58,8 +59,8 @@ const state: IHooksOptions = reactive({
 
 const downloadExcel = () => {
 	useLogLoginExportApi()
-  return
+	return
 }
 
-const { getDataList, selectionChangeHandle, sizeChangeHandle, currentChangeHandle} = useCrud(state)
+const { getDataList, selectionChangeHandle, sizeChangeHandle, currentChangeHandle } = useCrud(state)
 </script>

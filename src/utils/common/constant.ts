@@ -1,4 +1,4 @@
-import appPackage from '../../package.json'
+import appPackage from '../../../package.json'
 import cache from '@/utils/cache'
 
 /**

@@ -25,10 +25,10 @@ import { reactive, ref } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import store from '@/store'
 import { useI18n } from 'vue-i18n'
-import { validatePassword } from '@/utils/validate'
+import { validatePassword } from '@/utils/common/validate'
 import { updatePasswordApi } from '@/api/sys/user'
 import { ElMessage } from 'element-plus'
-import { closeTab } from '@/utils/tabs'
+import { closeTab } from '@/utils/common/tabs'
 
 const router = useRouter()
 const route = useRoute()

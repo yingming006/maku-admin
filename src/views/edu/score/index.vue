@@ -79,10 +79,10 @@ import { reactive, ref } from 'vue'
 import AddOrUpdate from './add-or-update.vue'
 import { IHooksOptions } from '@/hooks/interface'
 import FastSelect from '@/components/fast-select/src/fast-select.vue'
-import { getDictDataList } from '@/utils/tool'
+import { getDictDataList } from '@/utils/common/tool'
 import store from '@/store'
 import { useExamApi } from '@/api/edu/exam'
-import { useCrud } from '@/hooks'
+import { useCrud } from '@/hooks/useCrud'
 
 const state: IHooksOptions = reactive({
 	createdIsNeed: false,

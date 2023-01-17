@@ -17,7 +17,7 @@
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
 import { useClazzApi, useClazzSubmitApi } from '@/api/edu/clazz'
-import { getDictDataList, getDictLabel } from '@/utils/tool'
+import { getDictDataList, getDictLabel } from '@/utils/common/tool'
 import store from '@/store'
 import { ElMessage } from 'element-plus'
 
