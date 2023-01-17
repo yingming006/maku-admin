@@ -17,7 +17,7 @@
 			<fast-table-column dict-type="exam_type" label="考试类型" prop="type" header-align="center" align="center"></fast-table-column>
 			<el-table-column prop="startDate" label="考试开始时间" header-align="center" align="center"></el-table-column>
 			<el-table-column prop="endDate" label="考试结束时间" header-align="center" align="center"></el-table-column>
-			<el-table-column label="操作" fixed="right" header-align="center" align="center" width="150">
+			<el-table-column label="操作" fixed="right" header-align="center" align="center">
 				<template #default="scope">
 					<el-button v-auth="'edu:score:update'" type="primary" link @click="handleOpenMenu(scope.row.id)">导入成绩 </el-button>
 					<el-button v-auth="'edu:exam:update'" type="primary" link @click="addOrUpdateHandle(scope.row.id)">修改 </el-button>
