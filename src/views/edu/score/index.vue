@@ -50,6 +50,7 @@
 				<!--					<span v-else>缺考</span>-->
 				<!--				</template>-->
 			</el-table-column>
+			<el-table-column sortable prop="totalScore" label="总分" header-align="center" align="center"></el-table-column>
 			<el-table-column label="操作" fixed="right" header-align="center" align="center" width="150">
 				<template #default="scope">
 					<el-button v-auth="'edu:score:update'" type="primary" link @click="addOrUpdateHandle(state.queryForm.examId, scope.row.studentId)"
