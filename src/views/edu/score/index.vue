@@ -45,12 +45,17 @@
 				header-align="center"
 				align="center"
 			>
-				<!--				<template #default="scope">-->
-				<!--					<span v-if="scope.row['scoreList']['course_' + data.dictValue] != '-1'">{{ scope.row['scoreList']['course_' + data.dictValue] }}</span>-->
-				<!--					<span v-else>缺考</span>-->
-				<!--				</template>-->
+				<template #default="scope">
+					<span v-if="scope.row['missed'] !== 1">{{ scope.row['scoreList']['course_' + data.dictValue] }}</span>
+					<span v-else>缺考</span>
+				</template>
 			</el-table-column>
-			<el-table-column sortable prop="totalScore" label="总分" header-align="center" align="center"></el-table-column>
+			<el-table-column sortable prop="totalScore" label="总分" header-align="center" align="center">
+				<template #default="scope">
+					<span v-if="scope.row['missed'] !== 1">{{ scope.row['totalScore'] }}</span>
+					<span v-else>缺考</span>
+				</template>
+			</el-table-column>
 			<el-table-column label="操作" fixed="right" header-align="center" align="center" width="150">
 				<template #default="scope">
 					<el-button v-auth="'edu:score:update'" type="primary" link @click="addOrUpdateHandle(state.queryForm.examId, scope.row.studentId)"
