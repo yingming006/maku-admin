@@ -64,13 +64,13 @@ import { useRoute } from 'vue-router'
 import { ElMessage, UploadProps } from 'element-plus'
 import constant from '@/utils/common/constant'
 import cache from '@/utils/cache'
-import ImportTemplate from '@/views/edu/score/importTemplate.vue'
+import ImportTemplate from '@/views/edu/examStudent/importTemplate.vue'
 
 const state: IHooksOptions = reactive({
 	createdIsNeed: false,
 	limit: 100000,
-	dataListUrl: '/edu/score/page',
-	deleteUrl: '/edu/score',
+	dataListUrl: '/edu/examScore/page',
+	deleteUrl: '/edu/examScore',
 	queryForm: {
 		examId: '',
 		clazzId: ''

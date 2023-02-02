@@ -49,15 +49,15 @@ import store from '@/store'
 import { IHooksOptions } from '@/hooks/interface'
 import { useExamApi } from '@/api/edu/exam'
 import { useCrud } from '@/hooks/useCrud'
-import { userScoreExcelTemplateExport } from '@/api/edu/score'
+import { userScoreExcelTemplateExport } from '@/api/edu/exam_student'
 
 const visible = ref(false)
 
 const state: IHooksOptions = reactive({
 	createdIsNeed: false,
 	limit: 100000,
-	dataListUrl: '/edu/score/pageWithoutScore',
-	deleteUrl: '/edu/score',
+	dataListUrl: '/edu/examScore/pageWithoutScore',
+	deleteUrl: '/edu/examScore',
 	queryForm: {
 		examId: '',
 		clazzId: ''
