@@ -20,16 +20,14 @@
 					</el-select>
 				</el-form-item>
 				<el-form-item>
-					<el-button v-auth="'edu:score:export'" type="primary" @click="importTemplateHandle()">下载模板</el-button>
+					<el-button v-auth="'edu:examStudent:export'" type="primary" @click="importTemplateHandle()">下载模板</el-button>
 				</el-form-item>
 			</el-form>
 			<el-table v-loading="state.dataListLoading" :data="state.dataList" border style="width: 100%">
-				<el-table-column type="selection" header-align="center" align="center" width="50"></el-table-column>
-				<el-table-column fixed sortable="custom" prop="studentNo" label="学生学号" header-align="center" align="center"></el-table-column>
+				<el-table-column fixed prop="studentNo" label="学生学号" header-align="center" align="center"></el-table-column>
 				<el-table-column fixed prop="studentName" label="学生姓名" header-align="center" align="center"></el-table-column>
 				<el-table-column
 					v-for="data in courseList"
-					sortable
 					:prop="'scoreList.course_' + data.dictValue"
 					:label="data.dictLabel"
 					header-align="center"
@@ -56,8 +54,8 @@ const visible = ref(false)
 const state: IHooksOptions = reactive({
 	createdIsNeed: false,
 	limit: 100000,
-	dataListUrl: '/edu/examScore/pageWithoutScore',
-	deleteUrl: '/edu/examScore',
+	dataListUrl: '/edu/examStudent/pageWithoutScore',
+	deleteUrl: '/edu/examStudent',
 	queryForm: {
 		examId: '',
 		clazzId: ''

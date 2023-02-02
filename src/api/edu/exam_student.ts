@@ -8,14 +8,24 @@ export const useExamStudentApi = (id: number) => {
 
 export const useExamStudentSubmitApi = (dataForm: any) => {
 	// if (dataForm.id) {
-	return service.put('/edu/examStudent', dataForm)
+	return service.put('/edu/examStudent/updateScore', dataForm)
 	// } else {
 	// 	return service.post('/edu/score', dataForm)
 	// }
 }
 
+export const examStudentUpdateScoreApi = (dataForm: any) => {
+	return service.put('/edu/examStudent/updateScore', dataForm)
+}
+
 // 模板导出
 export const userScoreExcelTemplateExport = (dataForm: any) => {
 	location.href =
-		constant.apiUrl + '/edu/score/exportTemplate?examId=' + dataForm.examId + '&clazzId=' + dataForm.clazzId + '&access_token=' + cache.getToken()
+		constant.apiUrl +
+		'/edu/examStudent/exportTemplate?examId=' +
+		dataForm.examId +
+		'&clazzId=' +
+		dataForm.clazzId +
+		'&access_token=' +
+		cache.getToken()
 }

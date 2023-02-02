@@ -19,7 +19,7 @@
 			<el-table-column prop="endDate" label="考试结束时间" header-align="center" align="center"></el-table-column>
 			<el-table-column label="操作" fixed="right" header-align="center" align="center">
 				<template #default="scope">
-					<el-button v-auth="'edu:score:update'" type="primary" link @click="handleOpenMenu(scope.row.id)">导入成绩 </el-button>
+					<el-button v-auth="'edu:examStudent:update'" type="primary" link @click="handleOpenMenu(scope.row.id)">导入成绩 </el-button>
 					<el-button v-auth="'edu:exam:update'" type="primary" link @click="addOrUpdateHandle(scope.row.id)">修改 </el-button>
 					<el-button v-auth="'edu:exam:delete'" type="primary" link @click="deleteBatchHandle(scope.row.id)">删除 </el-button>
 				</template>
@@ -62,7 +62,7 @@ const addOrUpdateHandle = (id?: number) => {
 
 const router = useRouter()
 const handleOpenMenu = (id?: number) => {
-	router.push({ path: '/edu/score/import', query: { id: id } })
+	router.push({ path: '/edu/examStudent/import', query: { id: id } })
 }
 
 const { getDataList, selectionChangeHandle, sizeChangeHandle, currentChangeHandle, deleteBatchHandle } = useCrud(state)

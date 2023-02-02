@@ -13,18 +13,17 @@
 				<el-button @click="getDataList()">刷新</el-button>
 			</el-form-item>
 			<el-form-item>
-				<el-button v-auth="'edu:score:export'" type="primary" @click="importTemplateHandle(state.queryForm.examId, state.queryForm.clazzId)"
+				<el-button v-auth="'edu:examStudent:export'" type="primary" @click="importTemplateHandle(state.queryForm.examId, state.queryForm.clazzId)"
 					>下载模板</el-button
 				>
 			</el-form-item>
 			<el-form-item>
 				<el-upload :action="uploadExcelUrl" :data="state.queryForm" :before-upload="beforeUpload" :on-success="handleSuccess" :show-file-list="false">
-					<el-button v-auth="'edu:score:import'" type="info">导入</el-button>
+					<el-button v-auth="'edu:examStudent:import'" type="info">导入</el-button>
 				</el-upload>
 			</el-form-item>
 		</el-form>
 		<el-table v-loading="state.dataListLoading" :data="state.dataList" border style="width: 100%">
-			<!--			<el-table-column type="selection" header-align="center" align="center" width="50"></el-table-column>-->
 			<el-table-column fixed sortable="custom" prop="studentNo" label="学生学号" header-align="center" align="center"></el-table-column>
 			<el-table-column fixed prop="studentName" label="学生姓名" header-align="center" align="center"></el-table-column>
 			<el-table-column
@@ -38,7 +37,7 @@
 			</el-table-column>
 			<el-table-column label="操作" fixed="right" header-align="center" align="center" width="150">
 				<template #default="scope">
-					<el-button v-auth="'edu:score:update'" type="primary" link @click="addOrUpdateHandle(state.queryForm.examId, scope.row.studentId)"
+					<el-button v-auth="'edu:examStudent:update'" type="primary" link @click="addOrUpdateHandle(state.queryForm.examId, scope.row.studentId)"
 						>修改
 					</el-button>
 				</template>
@@ -69,15 +68,15 @@ import ImportTemplate from '@/views/edu/examStudent/importTemplate.vue'
 const state: IHooksOptions = reactive({
 	createdIsNeed: false,
 	limit: 100000,
-	dataListUrl: '/edu/examScore/page',
-	deleteUrl: '/edu/examScore',
+	dataListUrl: '/edu/examStudent/page',
+	deleteUrl: '/edu/examStudent',
 	queryForm: {
 		examId: '',
 		clazzId: ''
 	}
 })
 
-const uploadExcelUrl = constant.apiUrl + '/edu/score/import/' + '?access_token=' + cache.getToken()
+const uploadExcelUrl = constant.apiUrl + '/edu/examStudent/import' + '?access_token=' + cache.getToken()
 
 const route = useRoute()
 

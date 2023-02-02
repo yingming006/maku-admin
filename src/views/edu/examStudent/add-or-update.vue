@@ -27,8 +27,7 @@ import { ElMessage } from 'element-plus/es'
 import FastSelect from '@/components/fast-select/src/fast-select.vue'
 import { getDictLabel } from '@/utils/common/tool'
 import store from '@/store'
-import { useExamScoreSubmitApi } from '@/api/edu/exam_score'
-import { useExamStudentApi } from '@/api/edu/exam_student'
+import { useExamStudentApi, examStudentUpdateScoreApi } from '@/api/edu/exam_student'
 
 const emit = defineEmits(['refreshDataList'])
 
@@ -36,6 +35,7 @@ const visible = ref(false)
 const dataFormRef = ref()
 
 const dataForm = reactive({
+	id: 0,
 	examId: 0,
 	studentId: 0,
 	studentNo: '',
@@ -48,6 +48,7 @@ let courseList = [] as any[]
 
 const init = (id: number, examCourseList: any[]) => {
 	visible.value = true
+	dataForm.id = id
 	courseList = examCourseList
 
 	// 重置表单数据
@@ -96,7 +97,7 @@ const submitHandle = () => {
 			return false
 		}
 
-		useExamScoreSubmitApi(dataForm).then(() => {
+		examStudentUpdateScoreApi(dataForm).then(() => {
 			ElMessage.success({
 				message: '操作成功',
 				duration: 500,

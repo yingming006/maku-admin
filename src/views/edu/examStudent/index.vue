@@ -21,7 +21,7 @@
 				<el-button @click="getDataList()">查询</el-button>
 			</el-form-item>
 			<el-form-item>
-				<el-button v-auth="'edu:score:save'" type="primary" @click="addOrUpdateHandle()"> 新增 </el-button>
+				<el-button v-auth="'edu:examStudent:save'" type="primary" @click="addOrUpdateHandle()"> 新增 </el-button>
 			</el-form-item>
 		</el-form>
 		<el-table
@@ -58,7 +58,7 @@
 			</el-table-column>
 			<el-table-column label="操作" fixed="right" header-align="center" align="center" width="150">
 				<template #default="scope">
-					<el-button v-auth="'edu:score:update'" type="primary" link @click="addOrUpdateHandle(scope.row.id)">修改 </el-button>
+					<el-button v-auth="'edu:examStudent:update'" type="primary" link @click="addOrUpdateHandle(scope.row.id)">修改 </el-button>
 				</template>
 			</el-table-column>
 		</el-table>
