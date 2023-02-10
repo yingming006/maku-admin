@@ -10,7 +10,13 @@
 			<el-form-item label="学号" prop="studentName">
 				<el-input v-model="dataForm.studentNo" placeholder="学号" disabled></el-input>
 			</el-form-item>
-			<el-form-item v-for="item in dataForm.scoreDetailList" :label="item.courseName" :prop="'course_' + item.courseId" @change="scoreHandle">
+			<el-form-item
+				v-for="(item, index) in dataForm.scoreDetailList"
+				:key="index"
+				:label="item.courseName"
+				:prop="'course_' + item.courseId"
+				@change="scoreHandle"
+			>
 				<el-input-number v-model="item.score" :step="0.01" :controls="false"></el-input-number>
 			</el-form-item>
 		</el-form>

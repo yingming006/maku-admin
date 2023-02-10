@@ -2,7 +2,7 @@
 	<el-dialog v-model="visible" :title="title" :close-on-click-modal="false" width="600px">
 		<el-form ref="dataFormRef" :model="dataForm" :rules="dataRules" label-width="100px" @keyup.enter="submitHandle()">
 			<el-row>
-				<el-col v-for="item in courseList" :span="8" style="text-align: -webkit-center">
+				<el-col v-for="(item, index) in courseList" :key="index" :span="8" style="text-align: -webkit-center">
 					<el-switch v-model="item.value" name="course" inline-prompt :active-text="item.dictLabel" :inactive-text="item.dictLabel" size="large" />
 				</el-col>
 			</el-row>

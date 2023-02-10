@@ -1,8 +1,11 @@
 <template>
 	<el-dialog v-model="visible" :title="!dataForm.id ? '新增' : '修改'" :close-on-click-modal="false" width="400px">
 		<el-form ref="dataFormRef" :model="dataForm" :rules="dataRules" label-width="100px" @keyup.enter="submitHandle()">
+			<el-form-item label="班级编号" prop="no">
+				<el-input-number v-model="dataForm.no" placeholder="例如：202201" :controls="false" style="width: 100%"></el-input-number>
+			</el-form-item>
 			<el-form-item label="行政班级" prop="name">
-				<el-input v-model="dataForm.name" placeholder="行政班级，例如：一班、十一班"></el-input>
+				<el-input v-model="dataForm.name" placeholder="例如：一班、十一班"></el-input>
 			</el-form-item>
 			<el-form-item label="入学年份" prop="entranceYear">
 				<el-date-picker v-model="dataForm.entranceYear" type="year" value-format="YYYY" placeholder="入学年份" style="width: 100%" />
@@ -37,6 +40,7 @@ const dataFormRef = ref()
 
 const dataForm = reactive({
 	id: '',
+	no: null,
 	name: '',
 	entranceYear: '',
 	gradeId: '',
@@ -90,3 +94,9 @@ defineExpose({
 	init
 })
 </script>
+
+<style scoped>
+.el-input-number /deep/ .el-input__inner {
+	text-align: left;
+}
+</style>

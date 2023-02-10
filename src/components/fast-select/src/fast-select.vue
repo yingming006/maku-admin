@@ -1,6 +1,6 @@
 <template>
-	<el-select :model-value="modelValue + ''" :placeholder="placeholder" :clearable="clearable" @change="$emit('update:modelValue', $event)">
-		<el-option v-for="data in dataList" :key="data.dictValue" :label="data.dictLabel" :value="data.dictValue">{{ data.dictLabel }}</el-option>
+	<el-select :model-value="modelValue" :placeholder="placeholder" :clearable="clearable" @change="$emit('update:modelValue', $event)">
+		<el-option v-for="(data, index) in dataList" :key="index" :label="data.dictLabel" :value="data.dictValue">{{ data.dictLabel }}</el-option>
 	</el-select>
 </template>
 
@@ -10,7 +10,7 @@ import { getDictDataList } from '@/utils/common/tool'
 
 const props = defineProps({
 	modelValue: {
-		type: [Number, String],
+		type: [String],
 		required: true
 	},
 	dictType: {

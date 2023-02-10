@@ -19,6 +19,8 @@ export interface IHooksOptions {
 	order?: string
 	// 是否升序
 	asc?: boolean
+	// 是否进行 count 查询
+	searchCount?: boolean
 	// 当前页码
 	page?: number
 	// 每页数

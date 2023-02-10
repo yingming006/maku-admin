@@ -27,7 +27,8 @@
 				<el-table-column fixed prop="studentNo" label="学生学号" header-align="center" align="center"></el-table-column>
 				<el-table-column fixed prop="studentName" label="学生姓名" header-align="center" align="center"></el-table-column>
 				<el-table-column
-					v-for="data in courseList"
+					v-for="(data, index) in courseList"
+					:key="index"
 					:prop="'scoreList.course_' + data.dictValue"
 					:label="data.dictLabel"
 					header-align="center"

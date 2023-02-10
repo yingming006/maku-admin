@@ -2,6 +2,16 @@
 	<el-card>
 		<el-form :inline="true" :model="state.queryForm" @keyup.enter="getDataList()">
 			<el-form-item>
+				<fast-select
+					v-model="state.queryForm.gradeId"
+					dict-type="grade_dict"
+					placeholder="年级"
+					clearable
+					style="width: 120px"
+					@change="getClazz"
+				></fast-select>
+			</el-form-item>
+			<el-form-item>
 				<el-button @click="getDataList()">查询</el-button>
 			</el-form-item>
 			<el-form-item>
@@ -13,9 +23,10 @@
 		</el-form>
 		<el-table v-loading="state.dataListLoading" :data="state.dataList" border style="width: 100%" @selection-change="selectionChangeHandle">
 			<el-table-column type="selection" header-align="center" align="center" width="50"></el-table-column>
+			<el-table-column prop="no" label="班级编号" header-align="center" align="center"></el-table-column>
+			<fast-table-column prop="gradeId" label="年级" dict-type="grade_dict"></fast-table-column>
 			<el-table-column prop="name" label="行政班级" header-align="center" align="center"></el-table-column>
 			<el-table-column prop="entranceYear" label="入学年份" header-align="center" align="center"></el-table-column>
-			<fast-table-column prop="gradeId" label="年级" dict-type="grade_dict"></fast-table-column>
 			<fast-table-column prop="semesterId" label="学期" dict-type="semester_dict"></fast-table-column>
 			<fast-table-column prop="headmasterId" label="班主任" dict-type="teacher_dict"></fast-table-column>
 			<el-table-column label="操作" fixed="right" header-align="center" align="center" width="250">
@@ -51,11 +62,14 @@ import AddOrUpdate from './add-or-update.vue'
 import { IHooksOptions } from '@/hooks/interface'
 import FastTableColumn from '@/components/fast-table-column/src/fast-table-column.vue'
 import EditCourse from '@/views/edu/clazz/edit-course.vue'
+import FastSelect from '@/components/fast-select/src/fast-select.vue'
 
 const state: IHooksOptions = reactive({
 	dataListUrl: '/edu/clazz/page',
 	deleteUrl: '/edu/clazz',
-	queryForm: {}
+	queryForm: {
+		gradeId: ''
+	}
 })
 
 const addOrUpdateRef = ref()
@@ -66,6 +80,12 @@ const addOrUpdateHandle = (id?: number) => {
 const setCourseRef = ref()
 const setCourseHandle = (id?: number) => {
 	setCourseRef.value.init(id)
+}
+
+const getClazz = (val: string) => {
+	state.queryForm.gradeId = val
+
+	getDataList()
 }
 
 const { getDataList, selectionChangeHandle, sizeChangeHandle, currentChangeHandle, deleteBatchHandle } = useCrud(state)

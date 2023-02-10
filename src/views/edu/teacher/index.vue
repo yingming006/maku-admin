@@ -42,7 +42,7 @@
 
 <script setup lang="ts" name="EduTeacherIndex">
 import { useCrud } from '@/hooks/useCrud'
-import { onMounted, reactive, ref } from 'vue'
+import { reactive, ref } from 'vue'
 import { IHooksOptions } from '@/hooks/interface'
 import AddOrUpdate from '@/views/edu/teacher/add-or-update.vue'
 import FastTableColumn from '@/components/fast-table-column/src/fast-table-column.vue'

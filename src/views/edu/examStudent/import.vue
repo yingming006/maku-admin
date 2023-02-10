@@ -27,7 +27,8 @@
 			<el-table-column fixed sortable="custom" prop="studentNo" label="学生学号" header-align="center" align="center"></el-table-column>
 			<el-table-column fixed prop="studentName" label="学生姓名" header-align="center" align="center"></el-table-column>
 			<el-table-column
-				v-for="data in courseList"
+				v-for="(data, index) in courseList"
+				:key="index"
 				sortable
 				:prop="'scoreList.course_' + data.dictValue"
 				:label="data.dictLabel"
@@ -37,9 +38,7 @@
 			</el-table-column>
 			<el-table-column label="操作" fixed="right" header-align="center" align="center" width="150">
 				<template #default="scope">
-					<el-button v-auth="'edu:examStudent:update'" type="primary" link @click="addOrUpdateHandle(state.queryForm.examId, scope.row.studentId)"
-						>修改
-					</el-button>
+					<el-button v-auth="'edu:examStudent:update'" type="primary" link @click="addOrUpdateHandle(scope.row.id)">修改 </el-button>
 				</template>
 			</el-table-column>
 		</el-table>
@@ -117,8 +116,8 @@ const getExamClazzAndScore = (val: String) => {
 }
 
 const addOrUpdateRef = ref()
-const addOrUpdateHandle = (examId?: number, studentId?: number) => {
-	addOrUpdateRef.value.init(examId, studentId)
+const addOrUpdateHandle = (id: number) => {
+	addOrUpdateRef.value.init(id, courseList.value)
 }
 
 const importTemplateRef = ref()

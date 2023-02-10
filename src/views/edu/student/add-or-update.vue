@@ -1,6 +1,6 @@
 <template>
-	<el-dialog v-model="visible" :title="!dataForm.id ? '新增' : '修改'" :close-on-click-modal="false">
-		<el-form ref="dataFormRef" :model="dataForm" :rules="dataRules" label-width="100px" @keyup.enter="submitHandle()">
+	<el-dialog v-model="visible" :title="!dataForm.id ? '新增' : '修改'" :close-on-click-modal="false" width="16%">
+		<el-form ref="dataFormRef" :model="dataForm" :rules="dataRules" label-width="50px" @keyup.enter="submitHandle()">
 			<el-form-item label="学号" prop="no">
 				<el-input v-model="dataForm.no" placeholder="学号"></el-input>
 			</el-form-item>
@@ -10,8 +10,22 @@
 			<el-form-item prop="gender" label="性别">
 				<fast-select v-model="dataForm.gender" dict-type="user_gender" placeholder="性别" style="width: 100%"></fast-select>
 			</el-form-item>
+			<el-form-item prop="gradeId" label="年级">
+				<fast-select
+					v-model="dataForm.gradeId"
+					dict-type="grade_dict"
+					placeholder="年级"
+					clearable
+					style="width: 100%"
+					@change="changeGrade"
+				></fast-select>
+			</el-form-item>
 			<el-form-item prop="clazzId" label="班级">
-				<fast-select v-model="dataForm.clazzId" dict-type="clazz_dict" placeholder="班级" style="width: 100%"></fast-select>
+				<el-select v-model="dataForm.clazzId" placeholder="班级" clearable style="width: 100%">
+					<el-option v-for="(data, index) in formDictList" :key="index" :label="data.dictLabel" :value="data.dictValue">
+						{{ data.dictLabel }}
+					</el-option>
+				</el-select>
 			</el-form-item>
 		</el-form>
 		<template #footer>
@@ -24,25 +38,19 @@
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
 import { ElMessage } from 'element-plus/es'
-import { useStudentApi, useStudentSubmitApi } from '@/api/edu/student'
+import { StudentVO, useStudentApi, useStudentSubmitApi } from '@/api/edu/student'
+import service from '@/utils/common/request'
+import FastSelect from '@/components/fast-select/src/fast-select.vue'
 
 const emit = defineEmits(['refreshDataList'])
 
 const visible = ref(false)
 const dataFormRef = ref()
 
-const dataForm = reactive({
-	id: '',
-	no: '',
-	name: '',
-	gender: '',
-	gradeId: '',
-	clazzId: ''
-})
+const dataForm = reactive<StudentVO>({})
 
 const init = (id?: number) => {
 	visible.value = true
-	dataForm.id = ''
 
 	// 重置表单数据
 	if (dataFormRef.value) {
@@ -57,6 +65,21 @@ const init = (id?: number) => {
 const getStudent = (id: number) => {
 	useStudentApi(id).then(res => {
 		Object.assign(dataForm, res.data)
+		getClazzDict(res.data.gradeId)
+	})
+}
+
+const changeGrade = (val: string) => {
+	dataForm.clazzId = ''
+
+	getClazzDict(val)
+}
+
+let formDictList = ref<any[]>()
+
+const getClazzDict = (val: string) => {
+	service.get('/edu/clazz/dict?gradeId=' + val).then(res => {
+		formDictList.value = res.data.list || []
 	})
 }
 

@@ -1,6 +1,6 @@
 <template>
-	<el-dialog v-model="visible" :title="!dataForm.id ? '新增' : '修改'" :close-on-click-modal="false">
-		<el-form ref="dataFormRef" :model="dataForm" :rules="dataRules" label-width="100px" @keyup.enter="submitHandle()">
+	<el-dialog v-model="visible" :title="!dataForm.id ? '新增' : '修改'" :close-on-click-modal="false" width="16%">
+		<el-form ref="dataFormRef" :model="dataForm" :rules="dataRules" label-width="80px" @keyup.enter="submitHandle()">
 			<el-form-item label="课程名称" prop="name"> <el-input v-model="dataForm.name" placeholder="课程名称"></el-input> </el-form-item
 		></el-form>
 		<template #footer>

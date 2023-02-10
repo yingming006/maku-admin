@@ -17,6 +17,7 @@ export const useCrud = (options: IHooksOptions) => {
 		dataList: [],
 		order: '',
 		asc: true,
+		searchCount: true,
 		page: 1,
 		limit: 10,
 		total: 0,
@@ -57,6 +58,7 @@ export const useCrud = (options: IHooksOptions) => {
 					asc: state.asc,
 					page: state.isPage ? state.page : null,
 					limit: state.isPage ? state.limit : null,
+					searchCount: state.searchCount ? state.searchCount : null,
 					...state.queryForm
 				}
 			})
