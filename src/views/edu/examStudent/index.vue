@@ -54,6 +54,8 @@
 					<span v-else>缺考</span>
 				</template>
 			</el-table-column>
+			<el-table-column sortable prop="gradeRank" label="年级排名" header-align="center" align="center"> </el-table-column>
+			<el-table-column sortable prop="clazzRank" label="班级排名" header-align="center" align="center"> </el-table-column>
 			<el-table-column label="操作" fixed="right" header-align="center" align="center" width="150"> </el-table-column>
 		</el-table>
 		<!--		<el-pagination-->
