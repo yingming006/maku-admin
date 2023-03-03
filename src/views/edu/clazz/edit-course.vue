@@ -16,7 +16,7 @@
 
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
-import { useClazzApi, useClazzSubmitApi } from '@/api/edu/clazz'
+import { clazzDetailApi, updateClazzCourseTeacherApi } from '@/api/edu/clazz'
 import { getDictDataList, getDictLabel } from '@/utils/common/tool'
 import store from '@/store'
 import { ElMessage } from 'element-plus'
@@ -31,7 +31,8 @@ const dataForm = reactive({
 	name: '',
 	gradeId: '',
 	gradeName: '',
-	courseList: ''
+	courseList: '',
+	details: [] as any[]
 })
 
 const title = ref('开设课程')
@@ -55,7 +56,7 @@ const init = (id?: number) => {
 }
 
 const getClazz = (id: number) => {
-	useClazzApi(id).then(res => {
+	clazzDetailApi(id).then(res => {
 		Object.assign(dataForm, res.data)
 
 		dataForm.gradeName = getDictLabel(store.appStore.dictList, 'grade_dict', dataForm.gradeId)
@@ -64,7 +65,7 @@ const getClazz = (id: number) => {
 		// 已经开设的课程
 		for (let element of courseList) {
 			if (dataForm.courseList != null) {
-				element.value = dataForm.courseList.indexOf(element.dictValue + ',') >= 0
+				element.value = dataForm.details.some((detail: any) => detail.courseId === element.dictValue)
 			} else {
 				element.value = false
 			}
@@ -81,14 +82,14 @@ const submitHandle = () => {
 			return false
 		}
 
-		dataForm.courseList = ''
+		dataForm.details = new Array<any>()
 		for (let element of courseList) {
 			if (element.value) {
-				dataForm.courseList += element.dictValue + ','
+				dataForm.details.push({ clazzId: dataForm.id, clazzName: dataForm.name, courseId: element.dictValue, courseName: element.dictLabel })
 			}
 		}
 
-		useClazzSubmitApi(dataForm).then(() => {
+		updateClazzCourseTeacherApi(dataForm).then(() => {
 			ElMessage.success({
 				message: '操作成功',
 				duration: 500,
