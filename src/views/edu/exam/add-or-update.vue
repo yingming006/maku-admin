@@ -90,9 +90,12 @@ const dataForm = reactive({
 	dateRange: ref<[dayjs.ConfigType, dayjs.ConfigType]>(),
 	startDate: '',
 	endDate: '',
-	courseList: [] as string[],
-	courseFullScoreList: [] as number[]
+	courseList: [] as any[]
 })
+
+const clazzDictList = ref<Option[]>(getDictDataList(store.appStore.dictList, 'clazz_dict'))
+
+const courseList = getDictDataList(store.appStore.dictList, 'course_dict')
 
 const init = (id?: number) => {
 	visible.value = true
@@ -106,12 +109,12 @@ const init = (id?: number) => {
 
 	if (id) {
 		getExam(id)
+	} else {
+		for (let element of courseList) {
+			element.value = false
+		}
 	}
 }
-
-const clazzDictList = ref<Option[]>(getDictDataList(store.appStore.dictList, 'clazz_dict'))
-
-const courseList = getDictDataList(store.appStore.dictList, 'course_dict')
 
 const getExam = (id: number) => {
 	useExamApi(id).then(res => {
@@ -119,11 +122,13 @@ const getExam = (id: number) => {
 
 		dataForm.dateRange = [dayjs(res.data.startDate), dayjs(res.data.endDate)]
 
+		console.log(dataForm.courseList)
+
 		// 已经开设的课程
 		for (let element of courseList) {
 			if (Array.isArray(dataForm.courseList) && dataForm.courseList.length > 0) {
-				element.value = dataForm.courseList.includes(element.dictValue)
-				element.fullScore = dataForm.courseFullScoreList[dataForm.courseList.indexOf(element.dictValue)]
+				element.value = dataForm.courseList.some((course: any) => course.id === element.dictValue)
+				element.fullScore = dataForm.courseList.find((course: any) => course.id === element.dictValue).fullScore
 			} else {
 				element.value = false
 			}
@@ -143,8 +148,7 @@ const submitHandle = () => {
 		dataForm.courseList = []
 		for (let element of courseList) {
 			if (element.value) {
-				dataForm.courseList.push(element.dictValue)
-				dataForm.courseFullScoreList.push(element.fullScore)
+				dataForm.courseList.push({ id: element.dictValue, fullScore: element.fullScore })
 			}
 		}
 
